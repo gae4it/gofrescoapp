@@ -84,6 +84,5 @@ Per perfezionare il processo di deploy della `gofrescoapp`, si consiglia di segu
     - Progettare il database per la scalabilità (indici, query ottimizzate).
     - Considerare l'uso di un servizio di database gestito.
 
-8.  **Sicurezza:**
-    - Mantenere aggiornate tutte le dipendenze (`npm audit`).
-    - Applicare le best practice di sicurezza per le API tRPC (validazione input, autenticazione/autorizzazione).
+8.  **Sicurezza:** - Mantenere aggiornate tutte le dipendenze (`npm audit`). - Applicare le best practice di sicurezza per le API tRPC (validazione input, autenticazione/autorizzazione).
+    OK
