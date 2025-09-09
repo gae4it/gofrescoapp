@@ -1,52 +1,113 @@
-import { useState } from 'react';
-import { useCart } from '@/contexts/CartContext';
-import { type Product, type Variant, UnitType } from '@prisma/client';
+"use client";
+
+import { useState } from "react";
+import { useCart } from "@/contexts/CartContext";
+import { Plus, Minus, ShoppingCart } from "lucide-react";
+import type { Product } from "@/lib/mock-data"; // Importa il tipo dal nuovo file
 
 interface ProductCardProps {
-  product: Product & { variants: Variant[] };
+  product: Product;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
-  const { addItem } = useCart();
-  const [quantities, setQuantities] = useState<Record<number, number>>({});
+export function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
+  const [selectedVariantId, setSelectedVariantId] = useState(product.variants[0]?.id);
+  const [quantity, setQuantity] = useState(1);
 
-  const handleAddToCart = (variantId: number) => {
-    const quantity = quantities[variantId] || (product.unit === UnitType.WEIGHT ? 0.25 : 1);
-    addItem(variantId, quantity);
+  const Icon = product.icon;
+
+  const handleAddToCart = () => {
+    const selectedVariant = product.variants.find(v => v.id === selectedVariantId);
+    if (!selectedVariant) return;
+
+    addToCart(
+      {
+        productId: product.id,
+        variantId: selectedVariant.id,
+        name: product.name,
+        variantName: selectedVariant.name,
+        unit: product.unit,
+      },
+      quantity
+    );
+    setQuantity(1); 
   };
 
-  const handleQuantityChange = (variantId: number, newQuantity: number) => {
-    setQuantities((prev) => ({ ...prev, [variantId]: newQuantity }));
+  const handleQuantityChange = (amount: number) => {
+    const newQuantity = quantity + amount;
+    if (product.unit === 'WEIGHT') {
+        setQuantity(prev => Math.max(0.25, prev + amount));
+    } else {
+        setQuantity(prev => Math.max(1, prev + amount));
+    }
   };
-
-  const step = product.unit === UnitType.WEIGHT ? 0.25 : 1;
-  const min = product.unit === UnitType.WEIGHT ? 0.25 : 1;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-bold mb-4">{product.name}</h2>
-      <div>
-        {product.variants.map((variant) => (
-          <div key={variant.id} className="flex items-center justify-between mb-2">
-            <span>{variant.name}</span>
-            <div className="flex items-center">
-              <input
-                type="number"
-                min={min}
-                step={step}
-                value={quantities[variant.id] || min}
-                onChange={(e) => handleQuantityChange(variant.id, Number(e.target.value))}
-                className="w-20 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              />
-              <button
-                onClick={() => handleAddToCart(variant.id)}
-                className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-              >
-                Add to List
-              </button>
-            </div>
+    <div className="flex flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition-transform hover:scale-[1.02]">
+      <div className="flex items-center gap-4 p-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-600">
+            <Icon className="h-6 w-6" />
+        </div>
+        <div>
+            <h3 className="text-lg font-semibold">{product.name}</h3>
+            <p className="text-sm text-gray-500">
+            Unità: {product.unit === 'WEIGHT' ? 'Peso (kg)' : 'Pezzi'}
+            </p>
+        </div>
+      </div>
+
+      <div className="flex-grow space-y-4 p-4">
+        {/* Selettore Variante */}
+        <div>
+          <label htmlFor={`variant-${product.id}`} className="mb-1 block text-sm font-medium text-gray-700">
+            Variante
+          </label>
+          <select
+            id={`variant-${product.id}`}
+            value={selectedVariantId}
+            onChange={(e) => setSelectedVariantId(Number(e.target.value))}
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+          >
+            {product.variants.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Selettore Quantità */}
+        <div className="flex items-center justify-between">
+          <label className="text-sm font-medium text-gray-700">Quantità</label>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleQuantityChange(product.unit === 'WEIGHT' ? -0.25 : -1)}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
+              aria-label="Diminuisci quantità"
+            >
+              <Minus className="h-4 w-4" />
+            </button>
+            <span className="w-10 text-center font-medium">{quantity}</span>
+            <button
+              onClick={() => handleQuantityChange(product.unit === 'WEIGHT' ? 0.25 : 1)}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
+              aria-label="Aumenta quantità"
+            >
+              <Plus className="h-4 w-4" />
+            </button>
           </div>
-        ))}
+        </div>
+      </div>
+
+      {/* Bottone Aggiungi */}
+      <div className="border-t p-4 mt-auto">
+        <button
+          onClick={handleAddToCart}
+          className="flex w-full items-center justify-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          <ShoppingCart className="h-4 w-4" />
+          Aggiungi alla Lista
+        </button>
       </div>
     </div>
   );

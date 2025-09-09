@@ -1,101 +1,91 @@
 "use client";
 
 import { useCart } from "@/contexts/CartContext";
-import { api } from "@/trpc/react";
-import { useState } from "react";
+import { Plus, Minus, Trash2 } from "lucide-react";
 
 export default function CartPage() {
-  const { cart, removeItem, updateItemQuantity } = useCart();
-  const [customerName, setCustomerName] = useState("");
-  const [customerEmail, setCustomerEmail] = useState("");
+  const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
 
-  const variantIds = cart.map((item) => item.variantId);
-  const { data: variants, isLoading } = api.variant.getByIds.useQuery(
-    { ids: variantIds },
-    { enabled: variantIds.length > 0 }
-  );
-
-  const createOrder = api.order.create.useMutation();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    createOrder.mutate({
-      customerName,
-      customerEmail,
-      items: cart.map((item) => ({ ...item, quantity: Number(item.quantity) })),
-    });
-  };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const totalPrice = cartItems.reduce((total, item) => {
+    // Prezzo fittizio per la demo
+    const itemPrice = item.unit === 'WEIGHT' ? 2.50 : 1.80; 
+    return total + itemPrice * item.quantity;
+  }, 0);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-8">Lista della Spesa</h1>
-        <div className="bg-white rounded-lg shadow-md p-6">
-          {cart.length === 0 ? (
-            <p>La tua lista della spesa è vuota.</p>
-          ) : (
-            <ul>
-              {cart.map((item) => {
-                const variant = variants?.find((v) => v.id === item.variantId);
-                return (
-                  <li key={item.variantId} className="flex items-center justify-between mb-2">
-                    <span>{variant?.name}</span>
-                    <input
-                      type="number"
-                      value={item.quantity}
-                      onChange={(e) => updateItemQuantity(item.variantId, Number(e.target.value))}
-                      className="w-20 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                    />
-                    <button
-                      onClick={() => removeItem(item.variantId)}
-                      className="ml-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                    >
-                      Remove
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+    <div className="container mx-auto px-4 py-8 md:px-6">
+      <header className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight">La Tua Lista della Spesa</h1>
+        <p className="text-gray-500">
+          Controlla gli articoli e procedi con l'ordine.
+        </p>
+      </header>
+
+      {cartItems.length === 0 ? (
+        <div className="text-center">
+          <p className="text-lg">La tua lista della spesa è vuota.</p>
         </div>
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 mt-8">
-          <h2 className="text-2xl font-bold mb-4">Invia Ordine</h2>
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Nome
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            />
+      ) : (
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+          {/* Lista Articoli */}
+          <div className="space-y-4 lg:col-span-2">
+            {cartItems.map(item => (
+              <div key={item.variantId} className="flex items-center justify-between rounded-lg border bg-white p-4 shadow-sm">
+                <div>
+                  <h3 className="font-semibold">{item.name}</h3>
+                  <p className="text-sm text-gray-500">{item.variantName}</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  {/* Selettore Quantità */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
+                    >
+                      <Minus className="h-4 w-4" />
+                    </button>
+                    <span className="w-8 text-center font-medium">{item.quantity}</span>
+                    <button
+                      onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <button onClick={() => removeFromCart(item.variantId)} className="text-red-500 hover:text-red-700">
+                    <Trash2 className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+            ))}
+             <button onClick={clearCart} className="text-sm text-gray-500 hover:text-red-600 mt-4">
+                Svuota la lista
+            </button>
           </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={customerEmail}
-              onChange={(e) => setCustomerEmail(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            />
+
+          {/* Riepilogo Ordine */}
+          <div className="rounded-lg border bg-white p-6 shadow-sm lg:col-span-1 h-fit">
+            <h2 className="mb-4 text-xl font-semibold">Riepilogo</h2>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span>Subtotale</span>
+                <span>€{totalPrice.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Spedizione</span>
+                <span className="text-green-600">Gratis</span>
+              </div>
+              <div className="flex justify-between border-t pt-2 font-bold">
+                <span>Totale</span>
+                <span>€{totalPrice.toFixed(2)}</span>
+              </div>
+            </div>
+            <button className="mt-6 w-full rounded-md bg-blue-600 py-2 font-semibold text-white hover:bg-blue-700">
+              Invia Ordine (non funzionante)
+            </button>
           </div>
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-          >
-            Invia
-          </button>
-        </form>
-      </div>
-    </main>
+        </div>
+      )}
+    </div>
   );
 }
