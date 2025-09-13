@@ -32,15 +32,16 @@ export default function CartPage() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
           {/* Lista Articoli */}
           <div className="space-y-4 lg:col-span-2">
+            {/* CARD */}
             {cartItems.map(item => (
-              <div key={item.variantId} className="flex items-center justify-between rounded-lg border bg-white p-4 shadow-sm">
+              <div key={item.variantId} className="flex flex-col items-start justify-between gap-2 rounded-lg border bg-white p-4 shadow-sm xs:flex-row xs:items-center xs:justify-between xs:gap-0">
                 <div className="flex items-center gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
                     <span className="text-xl">{item.icon || '🛒'}</span>
                   </div>
                   <div>
                     <h3 className="font-semibold">{item.name}</h3>
-                    <p className="text-sm text-gray-500">{item.variantName}</p>
+                    <p className="font-semibold text-gray-500">{item.variantName}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
