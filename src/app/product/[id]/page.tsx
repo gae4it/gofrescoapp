@@ -1,18 +1,67 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import data from "../../../data.json";
-import ProductCard from "@/app/_components/ProductCard";
+import { useState, useEffect } from "react";
+import { ProductCard } from "@/app/_components/ProductCard";
+
+interface Product {
+  id: number;
+  name: string;
+  icon: string;
+  unit: string;
+  variants: Array<{
+    id: number;
+    name: string;
+  }>;
+}
+
+interface Category {
+  id: number;
+  name: string;
+  icon: string;
+  unit: string;
+}
+
+interface CategoryData {
+  products: Product[];
+}
 
 export default function ProductPage() {
   const params = useParams();
-  const productId = Number(params.id);
+  const productId = params?.id ? Number(params.id) : 0;
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Cerca il prodotto in tutte le categorie
-  let product = null;
-  for (const category of data.categories) {
-    product = category.products.find((p) => p.id === productId);
-    if (product) break;
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        // Since we don't have a specific product API, we'll need to search through all categories
+        const categoriesResponse = await fetch('/api/categories');
+        const categories = await categoriesResponse.json() as Category[];
+        
+        // Search for the product in all categories
+        for (const category of categories) {
+          const categoryResponse = await fetch(`/api/category?id=${category.id}`);
+          const categoryData = await categoryResponse.json() as CategoryData;
+          
+          const foundProduct = categoryData.products?.find((p: Product) => p.id === productId);
+          if (foundProduct) {
+            setProduct(foundProduct);
+            break;
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void fetchProduct();
+  }, [productId]);
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   if (!product) {

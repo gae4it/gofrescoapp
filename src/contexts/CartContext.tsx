@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 // Definiamo i tipi per gli oggetti nel carrello
 interface CartItem {
@@ -48,7 +48,7 @@ export function CartProvider({ children }: CartProviderProps) {
     try {
       const storedCart = localStorage.getItem('shopping-cart');
       if (storedCart) {
-        setCartItems(JSON.parse(storedCart));
+        setCartItems(JSON.parse(storedCart) as CartItem[]);
       }
     } catch (error) {
       console.error("Failed to parse cart from localStorage", error);
@@ -98,7 +98,7 @@ export function CartProvider({ children }: CartProviderProps) {
   };
 
   const getItemCount = () => {
-    return cartItems.reduce((total, item) => total + 1, 0); // Conta gli articoli unici
+    return cartItems.reduce((total, _item) => total + 1, 0); // Conta gli articoli unici
   };
 
   const value = {
