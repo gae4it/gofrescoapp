@@ -69,7 +69,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <div>
           <label
             htmlFor={`variant-${product.id}`}
-            className="mb-1 block text-sm font-medium text-gray-700"
+            className="mb-2 block text-sm font-medium text-gray-700"
           >
             Variante
           </label>
@@ -77,7 +77,7 @@ export function ProductCard({ product }: ProductCardProps) {
             id={`variant-${product.id}`}
             value={selectedVariantId}
             onChange={(e) => setSelectedVariantId(Number(e.target.value))}
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-1"
           >
             {product.variants.map((variant) => (
               <option key={variant.id} value={variant.id}>
@@ -100,7 +100,9 @@ export function ProductCard({ product }: ProductCardProps) {
             >
               <Minus className="h-4 w-4" />
             </button>
-            <span className="w-10 text-center font-medium">{quantity}</span>
+            <span className="w-16 text-center font-medium">
+              {quantity} {product.unit === "WEIGHT" ? "Kg" : "Pz"}
+            </span>
             <button
               onClick={() =>
                 handleQuantityChange(product.unit === "WEIGHT" ? 0.25 : 1)

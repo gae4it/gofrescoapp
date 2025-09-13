@@ -32,7 +32,15 @@ export default function CategoryPage() {
     void fetch(`/api/category?id=${categoryId}`)
       .then((res) => res.json())
       .then((data: Category) => {
-        setCategory(data);
+        // Aggiungi l'unità della categoria a ogni prodotto
+        const categoryWithProductUnits = {
+          ...data,
+          products: data.products.map(product => ({
+            ...product,
+            unit: data.unit
+          }))
+        };
+        setCategory(categoryWithProductUnits);
         setLoading(false);
       });
   }, [categoryId]);

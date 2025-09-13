@@ -52,7 +52,9 @@ export default function CartPage() {
                     >
                       <Minus className="h-4 w-4" />
                     </button>
-                    <span className="w-8 text-center font-medium">{item.quantity}</span>
+                    <span className="w-16 text-center font-medium">
+                      {item.quantity} {item.unit === 'WEIGHT' ? 'Kg' : 'Pz'}
+                    </span>
                     <button
                       onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
                       className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
