@@ -34,7 +34,7 @@ export default function CartPage() {
           <div className="space-y-4 lg:col-span-2">
             {/* CARD */}
             {cartItems.map(item => (
-              <div key={item.variantId} className="flex flex-col items-start justify-between gap-2 rounded-lg border bg-white p-4 shadow-sm xs:flex-row xs:items-center xs:justify-between xs:gap-0">
+              <div key={item.variantId} className="flex flex-col items-start justify-between gap-2.5 rounded-lg border bg-white p-4 shadow-sm xs:flex-row xs:items-center xs:justify-between xs:gap-0">
                 <div className="flex items-center gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
                     <span className="text-xl">{item.icon || '🛒'}</span>

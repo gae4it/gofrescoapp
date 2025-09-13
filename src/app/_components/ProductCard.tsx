@@ -53,7 +53,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <div className="flex flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition-transform hover:scale-[1.02]">
       <div className="flex items-center gap-4 p-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-600">
-          <span className="text-2xl">{product.icon}</span>
+          <span className="emoji text-2xl">{product.icon}</span>
         </div>
         <div>
           <h3 className="text-lg font-semibold">{product.name}</h3>
