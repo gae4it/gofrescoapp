@@ -8,6 +8,7 @@ type ProductVariant = { id: number; name: string };
 type Product = {
   id: number;
   name: string;
+  icon: string;
   unit: string;
   variants: ProductVariant[];
 };

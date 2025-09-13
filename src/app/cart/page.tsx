@@ -6,6 +6,9 @@ import { Plus, Minus, Trash2 } from "lucide-react";
 export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
 
+  // Debug: vediamo cosa c'è negli item del carrello
+  console.log('Cart items:', cartItems);
+
   const totalPrice = cartItems.reduce((total, item) => {
     // Prezzo fittizio per la demo
     const itemPrice = item.unit === 'WEIGHT' ? 2.50 : 1.80; 
@@ -17,7 +20,7 @@ export default function CartPage() {
       <header className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">La Tua Lista della Spesa</h1>
         <p className="text-gray-500">
-          Controlla gli articoli e procedi con l'ordine.
+          Controlla gli articoli e procedi con l&apos;ordine.
         </p>
       </header>
 
@@ -31,9 +34,14 @@ export default function CartPage() {
           <div className="space-y-4 lg:col-span-2">
             {cartItems.map(item => (
               <div key={item.variantId} className="flex items-center justify-between rounded-lg border bg-white p-4 shadow-sm">
-                <div>
-                  <h3 className="font-semibold">{item.name}</h3>
-                  <p className="text-sm text-gray-500">{item.variantName}</p>
+                <div className="flex items-center gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
+                    <span className="text-xl">{item.icon || '🛒'}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">{item.name}</h3>
+                    <p className="text-sm text-gray-500">{item.variantName}</p>
+                  </div>
                 </div>
                 <div className="flex items-center gap-4">
                   {/* Selettore Quantità */}

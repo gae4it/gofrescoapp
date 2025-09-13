@@ -8,6 +8,7 @@ interface CartItem {
   variantId: number;
   name: string;
   variantName: string;
+  icon: string;
   quantity: number;
   unit: 'WEIGHT' | 'PIECES';
 }
