@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { mockData } from "@/lib/mock-data";
+import data from "../../data.json";
 
 export default function HomePage() {
   return (
@@ -14,21 +14,19 @@ export default function HomePage() {
       </header>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
-        {mockData.map((category) => {
-          const Icon = category.icon;
-          return (
-            <Link
-              key={category.id}
-              href={`/category/${category.id}`}
-              className="group flex flex-col items-center justify-center gap-4 rounded-xl border bg-white p-6 text-center shadow-sm transition-all hover:scale-105 hover:shadow-lg"
-            >
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                <Icon className="h-8 w-8" />
-              </div>
-              <span className="text-lg font-semibold">{category.name}</span>
-            </Link>
-          );
-        })}
+        {data.categories.map((category) => (
+          <Link
+            key={category.id}
+            href={`/category/${category.id}`}
+            className="group flex flex-col items-center justify-center gap-4 rounded-xl border bg-white p-6 text-center shadow-sm transition-all hover:scale-105 hover:shadow-lg"
+          >
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+              {/* Qui puoi aggiungere un'icona generica oppure personalizzare */}
+              <span className="text-2xl">🛒</span>
+            </div>
+            <span className="text-lg font-semibold">{category.name}</span>
+          </Link>
+        ))}
       </div>
     </div>
   );

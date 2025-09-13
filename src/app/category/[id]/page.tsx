@@ -1,16 +1,49 @@
 "use client";
 
 import { ProductCard } from "@/app/_components/ProductCard";
-import { getCategoryById } from "@/lib/mock-data";
+import { useEffect, useState } from "react";
+
+type ProductVariant = string;
+type Product = {
+  id: number;
+  name: string;
+  unit: string;
+  variants: ProductVariant[];
+};
+type Category = {
+  id: number;
+  name: string;
+  unit: string;
+  products: Product[];
+};
+type DataJson = {
+  categories: Category[];
+};
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
 export default function CategoryPage({ params }: { params: { id: string } }) {
   const categoryId = Number(params.id);
-  const category = getCategoryById(categoryId);
+  const [category, setCategory] = useState<Category | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    void fetch("/api/data")
+      .then((res) => res.json())
+      .then((data: DataJson) => {
+        const found =
+          data.categories.find((cat) => cat.id === categoryId) ?? null;
+        setCategory(found);
+        setLoading(false);
+      });
+  }, [categoryId]);
 
   // Se la categoria non esiste, mostra una pagina 404
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   if (!category) {
     notFound();
   }
@@ -18,7 +51,7 @@ export default function CategoryPage({ params }: { params: { id: string } }) {
   return (
     <div className="container mx-auto px-4 py-8 md:px-6">
       <header className="mb-8 flex items-center gap-4">
-        <Link href="/" className="p-2 hover:bg-gray-200 rounded-full">
+        <Link href="/" className="rounded-full p-2 hover:bg-gray-200">
           <ChevronLeft className="h-6 w-6" />
         </Link>
         <div>

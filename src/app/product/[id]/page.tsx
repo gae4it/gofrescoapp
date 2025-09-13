@@ -1,19 +1,18 @@
 "use client";
 
-import { useParams } from 'next/navigation';
-import { api } from "@/trpc/react";
+import { useParams } from "next/navigation";
+import data from "../../../data.json";
 import ProductCard from "@/app/_components/ProductCard";
 
 export default function ProductPage() {
   const params = useParams();
   const productId = Number(params.id);
 
-  const { data: product, isLoading } = api.product.getById.useQuery({
-    id: productId,
-  });
-
-  if (isLoading) {
-    return <div>Loading...</div>;
+  // Cerca il prodotto in tutte le categorie
+  let product = null;
+  for (const category of data.categories) {
+    product = category.products.find((p) => p.id === productId);
+    if (product) break;
   }
 
   if (!product) {

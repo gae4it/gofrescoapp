@@ -1,0 +1,477 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Frutta",
+      "unit": "WEIGHT",
+      "products": [
+        {
+          "id": 1,
+          "name": "Mele",
+          "variants": [
+            "Kanzi",
+            "Granny Smith",
+            "Royal Gala",
+            "Fuji",
+            "Golden Delicious"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Pere",
+          "variants": [
+            "Abate",
+            "Carmen",
+            "Guyot",
+            "Santa Maria",
+            "William",
+            "Kaiser",
+            "Decana"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Uva",
+          "variants": [
+            "da tavola",
+            "Vittoria",
+            "Italia",
+            "Red Globe",
+            "Uva spina",
+            "Uva fragola"
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Pesche",
+          "variants": [
+            "nettarine",
+            "tabacchiera",
+            "percoche",
+            "pesche gialle",
+            "pesche bianche"
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Kiwi",
+          "variants": ["verde", "gold"]
+        },
+        {
+          "id": 6,
+          "name": "Banane",
+          "variants": ["Cavendish", "plantain", "banane rosse"]
+        },
+        {
+          "id": 7,
+          "name": "Angurie",
+          "variants": ["crimson sweet", "sugar baby", "moon and stars"]
+        },
+        {
+          "id": 8,
+          "name": "Frutti rossi",
+          "variants": [
+            "mirtilli",
+            "fragole",
+            "lamponi",
+            "ribes",
+            "more",
+            "ribes rosso",
+            "ribes nero"
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Albicocche",
+          "variants": ["Bella d'Italia", "Precoce di Treviglio", "Valleggia"]
+        },
+        {
+          "id": 10,
+          "name": "Susine",
+          "variants": ["Santa Rosa", "Angelino", "President"]
+        },
+        {
+          "id": 11,
+          "name": "Ciliegie",
+          "variants": ["Durone", "Ferrovia", "Bigarreau"]
+        },
+        {
+          "id": 12,
+          "name": "Meloni",
+          "variants": ["cantalupo", "retato", "invernale"]
+        },
+        {
+          "id": 13,
+          "name": "Arance",
+          "variants": [
+            "da tavola",
+            "da spremere",
+            "Navel",
+            "Tarocco",
+            "Valencia"
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Limoni",
+          "variants": ["Femminello", "Meyer", "Eureka"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Verdura",
+      "unit": "WEIGHT",
+      "products": [
+        {
+          "id": 15,
+          "name": "Carciofi",
+          "variants": ["Romanesco", "Spinoso", "Violetto"]
+        },
+        {
+          "id": 16,
+          "name": "Asparagi",
+          "variants": ["verdi", "bianchi", "viola"]
+        },
+        {
+          "id": 17,
+          "name": "Zucca",
+          "variants": ["Butternut", "Hokkaido", "Spaghetti"]
+        },
+        {
+          "id": 18,
+          "name": "Pomodori",
+          "variants": ["San Marzano", "Pixel", "Ciliegino", "Cuore di Bue"]
+        },
+        {
+          "id": 19,
+          "name": "Patate",
+          "variants": ["novelle", "pasta gialla", "pasta bianca"]
+        },
+        {
+          "id": 20,
+          "name": "Zucchine",
+          "variants": ["verdi", "gialle", "trombetta"]
+        },
+        {
+          "id": 21,
+          "name": "Insalata",
+          "variants": ["lattuga", "rucola", "radicchio", "iceberg", "romana"]
+        },
+        {
+          "id": 22,
+          "name": "Peperoni",
+          "variants": ["rossi", "gialli", "verdi", "arancioni"]
+        },
+        {
+          "id": 23,
+          "name": "Melanzane",
+          "variants": ["lunghe", "tonde", "violette"]
+        },
+        {
+          "id": 24,
+          "name": "Cavolfiori",
+          "variants": ["bianchi", "verdi", "viola"]
+        },
+        {
+          "id": 25,
+          "name": "Broccoli",
+          "variants": ["verdi", "viola", "romanesco"]
+        },
+        {
+          "id": 26,
+          "name": "Spinaci",
+          "variants": ["freschi", "baby"]
+        },
+        {
+          "id": 27,
+          "name": "Carote",
+          "variants": ["arancioni", "gialle", "viola"]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Alimentari",
+      "unit": "PIECES",
+      "products": [
+        {
+          "id": 28,
+          "name": "Affettati di carne",
+          "variants": [
+            "Crudo di Parma",
+            "Crudo San Daniele",
+            "Cotto",
+            "Salame",
+            "Coppa",
+            "Pancetta",
+            "Culatello",
+            "Speck",
+            "Bresaola",
+            "Mortadella",
+            "Wurstel"
+          ]
+        },
+        {
+          "id": 29,
+          "name": "Conserve di pesce",
+          "variants": [
+            "Tonno in olio",
+            "Tonno al naturale",
+            "Tonno rosso",
+            "Ventresca di tonno",
+            "Tonno pinne gialle",
+            "Salmone affumicato",
+            "Sardine in olio",
+            "Acciughe in olio",
+            "Acciughe in salsa piccante"
+          ]
+        },
+        {
+          "id": 30,
+          "name": "Legumi e polenta",
+          "variants": [
+            "Ceci",
+            "Fagioli borlotti",
+            "Fagioli cannellini",
+            "Lenticchie",
+            "Piselli",
+            "Polenta",
+            "Polenta Taragna",
+            "Purè di Patate"
+          ]
+        },
+        {
+          "id": 31,
+          "name": "Pasta",
+          "variants": [
+            "Spaghetti",
+            "Penne",
+            "Fusilli",
+            "Linguine",
+            "Paccheri",
+            "Farfalle",
+            "Orecchiette",
+            "Tagliatelle",
+            "Ravioli",
+            "Tortellini",
+            "Integrale",
+            "Senza Glutine",
+            "Kamut",
+            "Legumi"
+          ]
+        },
+        {
+          "id": 32,
+          "name": "Riso",
+          "variants": [
+            "Arborio",
+            "Carnaroli",
+            "Basmati",
+            "Venere",
+            "Jasmine",
+            "Integrale",
+            "Parboiled"
+          ]
+        },
+        { "id": 33, "name": "Uova", "variants": ["Allevate a terra", "Bio"] },
+        {
+          "id": 34,
+          "name": "Latte e latticini",
+          "variants": [
+            "Intero",
+            "Scremato",
+            "Senza lattosio",
+            "Soia",
+            "Mandorla",
+            "Avena",
+            "Cocco",
+            "Burro",
+            "Panna",
+            "Yogurt bianco senza grassi",
+            "Yogurt bianco normale",
+            "Yogurt alla frutta"
+          ]
+        },
+        {
+          "id": 35,
+          "name": "Formaggi",
+          "variants": [
+            "Mozzarella di bufala",
+            "Mozzarella treccia",
+            "Ricotta",
+            "Stracchino",
+            "Parmigiano Reggiano",
+            "Pecorino",
+            "Grana Padano",
+            "Gorgonzola",
+            "Formaggini",
+            "Philadelphia"
+          ]
+        },
+        {
+          "id": 36,
+          "name": "Colazione",
+          "variants": [
+            "Muesli",
+            "Cornflakes",
+            "Biscotti Frollini",
+            "Biscotti Integrali",
+            "Biscotti Senza zucchero",
+            "Wafer",
+            "Biscotti per bambini",
+            "Biscotti Gocciole",
+            "Biscotti Oro Saiwa"
+          ]
+        },
+        {
+          "id": 37,
+          "name": "Marmellate e creme",
+          "variants": [
+            "Marmellata di Frutta",
+            "Miele",
+            "Nutella",
+            "Crema di pistacchio",
+            "Crema di nocciola"
+          ]
+        },
+        {
+          "id": 38,
+          "name": "Snack salati",
+          "variants": [
+            "Crackers",
+            "Patatine",
+            "Taralli",
+            "Grissini",
+            "Mandorle",
+            "Noci",
+            "Pistacchi",
+            "Mix",
+            "Gallette di riso",
+            "Gallette di grano saraceno",
+            "Gallette di mais"
+          ]
+        },
+        {
+          "id": 39,
+          "name": "Snack dolci",
+          "variants": [
+            "Cioccolato Fondente",
+            "Cioccolato al latte",
+            "Brioche",
+            "Gelato"
+          ]
+        },
+        {
+          "id": 40,
+          "name": "Olio e aceto",
+          "variants": [
+            "Di olive taggiasche",
+            "Italiano",
+            "Europeo",
+            "Di semi di girasole",
+            "Di arachidi",
+            "Aromatizzato",
+            "Aceto balsamico",
+            "Aceto di mele",
+            "Aceto di vino"
+          ]
+        },
+        {
+          "id": 41,
+          "name": "Condimenti e salse",
+          "variants": [
+            "Ketchup",
+            "Maionese",
+            "Senape",
+            "Salsa BBQ",
+            "Soya",
+            "Tabasco"
+          ]
+        },
+        {
+          "id": 42,
+          "name": "Ready-to-eat",
+          "variants": [
+            "Zuppa di lenticchie",
+            "Zuppa di legumi",
+            "Zuppa di zucca",
+            "Polenta"
+          ]
+        },
+        {
+          "id": 43,
+          "name": "Acqua",
+          "variants": ["Naturale", "Frizzante", "Leggermente frizzante"]
+        },
+        {
+          "id": 44,
+          "name": "Vino",
+          "variants": ["Rosso", "Bianco", "Rosé", "Spumante"]
+        },
+        {
+          "id": 45,
+          "name": "Birra",
+          "variants": ["Chiara", "Scura", "Rossa", "Artigianale"]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Prodotti per la Casa",
+      "unit": "PIECES",
+      "products": [
+        {
+          "id": 46,
+          "name": "Detersivi per piatti",
+          "variants": ["liquidi", "in polvere", "in pastiglie"]
+        },
+        {
+          "id": 47,
+          "name": "Detersivi per bucato",
+          "variants": ["liquidi", "in polvere", "in capsule"]
+        },
+        {
+          "id": 48,
+          "name": "Pulitori multiuso",
+          "variants": ["spray", "liquidi", "in pastiglie"]
+        },
+        {
+          "id": 49,
+          "name": "Prodotti per la pulizia del bagno",
+          "variants": ["detergenti", "disinfettanti", "anticalcare"]
+        },
+        {
+          "id": 50,
+          "name": "Prodotti per la pulizia della cucina",
+          "variants": ["detergenti", "sgrassatori", "disinfettanti"]
+        },
+        {
+          "id": 51,
+          "name": "Prodotti per la pulizia dei vetri",
+          "variants": ["spray", "liquidi"]
+        },
+        {
+          "id": 52,
+          "name": "Deodoranti per ambienti",
+          "variants": ["spray", "diffusori", "bastoncini"]
+        },
+        {
+          "id": 53,
+          "name": "Sacchetti per la spazzatura",
+          "variants": ["grandi", "medi", "piccoli"]
+        },
+        {
+          "id": 54,
+          "name": "Carta igienica",
+          "variants": ["doppia velina", "tripla velina", "extra morbida"]
+        },
+        {
+          "id": 55,
+          "name": "Rotoli di carta da cucina",
+          "variants": ["monostrato", "multistrato", "extra assorbenti"]
+        }
+      ]
+    }
+  ]
+}
