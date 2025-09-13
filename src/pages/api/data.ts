@@ -11,7 +11,7 @@ export default async function handler(
     const fileContents = await fs.readFile(filePath, "utf-8");
     const data = JSON.parse(fileContents);
     res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ error: "Impossibile leggere il database JSON" });
+  } catch {
+  res.status(500).json({ error: "Impossibile leggere il file JSON" });
   }
 }

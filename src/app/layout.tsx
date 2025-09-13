@@ -25,7 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="it" className={`${geist.variable}`}>
+    <html lang="it" className={`${geist.variable}`}> 
+      <head>
+        <meta name="robots" content="noindex, nofollow" />
+      </head>
       <body>
         <TRPCReactProvider>
           <CartProvider>

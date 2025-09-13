@@ -1,7 +1,47 @@
+"use client";
 import Link from "next/link";
-import data from "../../data.json";
+import { useEffect, useState } from "react";
+
+type Category = {
+  id: number;
+  name: string;
+  icon: string;
+};
 
 export default function HomePage() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        // Assicura che sia sempre un array di Category
+        if (Array.isArray(data)) {
+          setCategories(
+            data.filter((cat: unknown): cat is Category => {
+              if (typeof cat === "object" && cat !== null) {
+                const obj = cat as Record<string, unknown>;
+                return (
+                  typeof obj.id === "number" &&
+                  typeof obj.name === "string" &&
+                  typeof obj.icon === "string"
+                );
+              }
+              return false;
+            })
+          );
+        } else {
+          setCategories([]);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        setCategories([]);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="container mx-auto px-4 py-8 md:px-6">
       <header className="mb-8 text-center">
@@ -13,21 +53,28 @@ export default function HomePage() {
         </p>
       </header>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
-        {data.categories.map((category) => (
-          <Link
-            key={category.id}
-            href={`/category/${category.id}`}
-            className="group flex flex-col items-center justify-center gap-4 rounded-xl border bg-white p-6 text-center shadow-sm transition-all hover:scale-105 hover:shadow-lg"
-          >
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-              {/* Qui puoi aggiungere un'icona generica oppure personalizzare */}
-              <span className="text-2xl">🛒</span>
-            </div>
-            <span className="text-lg font-semibold">{category.name}</span>
-          </Link>
-        ))}
-      </div>
+      {loading ? (
+        <div className="text-center">Caricamento...</div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
+          {categories.length > 0 ? (
+            categories.map((category) => (
+              <Link
+                key={category.id}
+                href={`/category/${category.id}`}
+                className="group flex flex-col items-center justify-center gap-4 rounded-xl border bg-white p-6 text-center shadow-sm transition-all hover:scale-105 hover:shadow-lg"
+              >
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                  <span className="text-2xl">{category.icon}</span>
+                </div>
+                <span className="text-lg font-semibold">{category.name}</span>
+              </Link>
+            ))
+          ) : (
+            <div className="col-span-4 text-center text-gray-500">Nessuna categoria disponibile.</div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

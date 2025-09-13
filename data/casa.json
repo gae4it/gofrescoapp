@@ -1,0 +1,18 @@
+{
+  "id": 4,
+  "name": "Prodotti per la Casa",
+  "icon": "🧹",
+  "unit": "PIECES",
+  "products": [
+    { "id": 401, "name": "Detersivi per piatti", "icon": "🧼", "variants": [ { "id": 4001, "name": "liquidi" }, { "id": 4002, "name": "in polvere" }, { "id": 4003, "name": "in pastiglie" } ] },
+    { "id": 402, "name": "Detersivi per bucato", "icon": "👕", "variants": [ { "id": 4011, "name": "liquidi" }, { "id": 4012, "name": "in polvere" }, { "id": 4013, "name": "in capsule" } ] },
+    { "id": 403, "name": "Pulitori multiuso", "icon": "🧴", "variants": [ { "id": 4021, "name": "spray" }, { "id": 4022, "name": "liquidi" }, { "id": 4023, "name": "in pastiglie" } ] },
+    { "id": 404, "name": "Prodotti per la pulizia del bagno", "icon": "🚿", "variants": [ { "id": 4031, "name": "detergenti" }, { "id": 4032, "name": "disinfettanti" }, { "id": 4033, "name": "anticalcare" } ] },
+    { "id": 405, "name": "Prodotti per la pulizia della cucina", "icon": "🍽️", "variants": [ { "id": 4041, "name": "detergenti" }, { "id": 4042, "name": "sgrassatori" }, { "id": 4043, "name": "disinfettanti" } ] },
+    { "id": 406, "name": "Prodotti per la pulizia dei vetri", "icon": "🪟", "variants": [ { "id": 4051, "name": "spray" }, { "id": 4052, "name": "liquidi" } ] },
+    { "id": 407, "name": "Deodoranti per ambienti", "icon": "🌸", "variants": [ { "id": 4061, "name": "spray" }, { "id": 4062, "name": "diffusori" }, { "id": 4063, "name": "bastoncini" } ] },
+    { "id": 408, "name": "Sacchetti per la spazzatura", "icon": "🗑️", "variants": [ { "id": 4071, "name": "grandi" }, { "id": 4072, "name": "medi" }, { "id": 4073, "name": "piccoli" } ] },
+    { "id": 409, "name": "Carta igienica", "icon": "🧻", "variants": [ { "id": 4081, "name": "doppia velina" }, { "id": 4082, "name": "tripla velina" }, { "id": 4083, "name": "extra morbida" } ] },
+    { "id": 410, "name": "Rotoli di carta da cucina", "icon": "📄", "variants": [ { "id": 4091, "name": "monostrato" }, { "id": 4092, "name": "multistrato" }, { "id": 4093, "name": "extra assorbenti" } ] }
+  ]
+}

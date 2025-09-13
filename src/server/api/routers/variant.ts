@@ -5,7 +5,7 @@ export const variantRouter = createTRPCRouter({
   getByIds: publicProcedure
     .input(z.object({ ids: z.array(z.number()) }))
     .query(({ ctx, input }) => {
-      return ctx.db.variant.findMany({
+  // ...rimosso accesso db...
         where: { id: { in: input.ids } },
         include: { product: true },
       });

@@ -2,8 +2,9 @@
 
 import { ProductCard } from "@/app/_components/ProductCard";
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
-type ProductVariant = string;
+type ProductVariant = { id: number; name: string };
 type Product = {
   id: number;
   name: string;
@@ -16,25 +17,21 @@ type Category = {
   unit: string;
   products: Product[];
 };
-type DataJson = {
-  categories: Category[];
-};
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
-export default function CategoryPage({ params }: { params: { id: string } }) {
-  const categoryId = Number(params.id);
+export default function CategoryPage() {
+  const params = useParams();
+  const categoryId = params?.id ? Number(params.id) : 0;
   const [category, setCategory] = useState<Category | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    void fetch("/api/data")
+    void fetch(`/api/category?id=${categoryId}`)
       .then((res) => res.json())
-      .then((data: DataJson) => {
-        const found =
-          data.categories.find((cat) => cat.id === categoryId) ?? null;
-        setCategory(found);
+      .then((data: Category) => {
+        setCategory(data);
         setLoading(false);
       });
   }, [categoryId]);

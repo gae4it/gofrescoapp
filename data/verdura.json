@@ -1,0 +1,21 @@
+{
+  "id": 2,
+  "name": "Verdura",
+  "icon": "🥬",
+  "unit": "WEIGHT",
+  "products": [
+    { "id": 201, "name": "Carciofi", "icon": "🌱", "variants": [ { "id": 2001, "name": "Romanesco" }, { "id": 2002, "name": "Spinoso" }, { "id": 2003, "name": "Violetto" } ] },
+    { "id": 202, "name": "Asparagi", "icon": "🥬", "variants": [ { "id": 2011, "name": "verdi" }, { "id": 2012, "name": "bianchi" }, { "id": 2013, "name": "viola" } ] },
+    { "id": 203, "name": "Zucca", "icon": "🎃", "variants": [ { "id": 2021, "name": "Butternut" }, { "id": 2022, "name": "Hokkaido" }, { "id": 2023, "name": "Spaghetti" } ] },
+    { "id": 204, "name": "Pomodori", "icon": "🍅", "variants": [ { "id": 2031, "name": "San Marzano" }, { "id": 2032, "name": "Pixel" }, { "id": 2033, "name": "Ciliegino" }, { "id": 2034, "name": "Cuore di Bue" } ] },
+    { "id": 205, "name": "Patate", "icon": "🥔", "variants": [ { "id": 2041, "name": "novelle" }, { "id": 2042, "name": "pasta gialla" }, { "id": 2043, "name": "pasta bianca" } ] },
+    { "id": 206, "name": "Zucchine", "icon": "🥒", "variants": [ { "id": 2051, "name": "verdi" }, { "id": 2052, "name": "gialle" }, { "id": 2053, "name": "trombetta" } ] },
+    { "id": 207, "name": "Insalata", "icon": "🥬", "variants": [ { "id": 2061, "name": "lattuga" }, { "id": 2062, "name": "rucola" }, { "id": 2063, "name": "radicchio" }, { "id": 2064, "name": "iceberg" }, { "id": 2065, "name": "romana" } ] },
+    { "id": 208, "name": "Peperoni", "icon": "🫑", "variants": [ { "id": 2071, "name": "rossi" }, { "id": 2072, "name": "gialli" }, { "id": 2073, "name": "verdi" }, { "id": 2074, "name": "arancioni" } ] },
+    { "id": 209, "name": "Melanzane", "icon": "🍆", "variants": [ { "id": 2081, "name": "lunghe" }, { "id": 2082, "name": "tonde" }, { "id": 2083, "name": "violette" } ] },
+    { "id": 210, "name": "Cavolfiori", "icon": "🥦", "variants": [ { "id": 2091, "name": "bianchi" }, { "id": 2092, "name": "verdi" }, { "id": 2093, "name": "viola" } ] },
+    { "id": 211, "name": "Broccoli", "icon": "🥦", "variants": [ { "id": 2101, "name": "verdi" }, { "id": 2102, "name": "viola" }, { "id": 2103, "name": "romanesco" } ] },
+    { "id": 212, "name": "Spinaci", "icon": "🥬", "variants": [ { "id": 2111, "name": "freschi" }, { "id": 2112, "name": "baby" } ] },
+    { "id": 213, "name": "Carote", "icon": "🥕", "variants": [ { "id": 2121, "name": "arancioni" }, { "id": 2122, "name": "gialle" }, { "id": 2123, "name": "viola" } ] }
+  ]
+}

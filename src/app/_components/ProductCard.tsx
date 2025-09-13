@@ -9,29 +9,34 @@ interface ProductCardProps {
     id: number;
     name: string;
     unit: string;
-    variants: string[];
+    variants: { id: number; name: string }[];
   };
 }
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
 
-  const [selectedVariant, setSelectedVariant] = useState(
-    product.variants[0] || "",
+  const [selectedVariantId, setSelectedVariantId] = useState(
+    product.variants[0]?.id ?? 0,
   );
   const [quantity, setQuantity] = useState(1);
 
+  const selectedVariant = product.variants.find(v => v.id === selectedVariantId);
+
   const handleAddToCart = () => {
-    addToCart(
-      {
-        productId: product.id,
-        variantName: selectedVariant,
-        name: product.name,
-        unit: product.unit,
-      },
-      quantity,
-    );
-    setQuantity(1);
+    if (selectedVariant) {
+      addToCart(
+        {
+          productId: product.id,
+          variantId: selectedVariant.id,
+          variantName: selectedVariant.name,
+          name: product.name,
+          unit: product.unit as "WEIGHT" | "PIECES",
+        },
+        quantity,
+      );
+      setQuantity(1);
+    }
   };
 
   const handleQuantityChange = (amount: number) => {
@@ -68,13 +73,13 @@ export function ProductCard({ product }: ProductCardProps) {
           </label>
           <select
             id={`variant-${product.id}`}
-            value={selectedVariant}
-            onChange={(e) => setSelectedVariant(e.target.value)}
+            value={selectedVariantId}
+            onChange={(e) => setSelectedVariantId(Number(e.target.value))}
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
           >
             {product.variants.map((variant) => (
-              <option key={variant} value={variant}>
-                {variant}
+              <option key={variant.id} value={variant.id}>
+                {variant.name}
               </option>
             ))}
           </select>
