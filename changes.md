@@ -1,111 +1,62 @@
-# Project Modification Log
 
-This file automatically tracks all modifications made by the Gemini CLI.
+# Project Change Log
 
----
-
-## Stato di Avanzamento del Prompt `startingprompt.md` (9 Settembre 2025)
-
-### Cambio di Strategia
-
-Su richiesta, lo sviluppo si concentrerà prima sulla costruzione dell'interfaccia utente (UI) con dati fittizi (mock data). I passaggi relativi al database e all'API backend verranno posticipati.
-
-### In Corso:
-
-#### Passo 1: Sviluppo dell'Interfaccia Utente (Next.js & React)
-
-- **Gestione Stato Lista Spesa:**
-  - Crea `src/contexts/CartContext.tsx` per gestire la lista della spesa e salvarla in `localStorage`.
-- **Componenti (`src/app/_components/`):**
-  - `ProductCard.tsx`: Mostra prodotto, varianti, selettore quantità e bottone "Aggiungi alla Lista della Spesa".
-  - `Navbar.tsx`: Include link a `/cart` con badge articoli.
-  - `BottomNav.tsx`: Menu di navigazione inferiore per mobile.
-- **Pagine (App Router):**
-  - Home (`/page.tsx`): Mostra le categorie.
-  - Pagina Categoria (`/category/[id]/page.tsx`): Mostra i prodotti di una categoria.
-  - Pagina Lista Spesa (`/cart/page.tsx`): Mostra il riepilogo della lista e il form di invio ordine.
-- **Requisiti UI/UX e Funzionali:**
-  - Assicurare un design pulito, minimalista, mobile-first e responsive.
-  - Utilizzare icone grandi e chiare.
-  - Usare la terminologia "Lista della Spesa".
-  - Implementare una barra di ricerca nella `Navbar`.
-
-### Posticipato:
-
-#### Passo 2: Definizione dello Schema del Database
-
-- Modifica il file `prisma/schema.prisma`.
-
-#### Passo 3: Popolamento del Database (Seed)
-
-- Crea uno script di seed in `prisma/seed.ts`.
-
-#### Passo 4: Sviluppo dell'API Backend (tRPC)
-
-- Crea i router tRPC in `src/server/api/routers/`.
+This file summarizes the evolution of GoFresco from its original T3 Next.js template to the current, cleaner, database-free, AI-friendly structure.
 
 ---
 
-## Modifiche Settembre 2025
+## Initial State: T3 Next.js Project
 
-- Rimossa completamente la dipendenza da database e Prisma:
-  - Eliminati tutti i file e riferimenti relativi a Prisma e database (PostgreSQL).
-  - Rimossi script e variabili d'ambiente non più necessari (DATABASE_URL).
-- Creato sistema di gestione dati tramite file JSON:
-  - Creati i file `data/frutta.json`, `data/verdura.json`, `data/alimentari.json`, `data/casa.json` con struttura prodotti, varianti e icone.
-  - Aggiornata l'API Next.js (`src/pages/api/categories.ts` e `src/pages/api/category.ts`) per leggere i dati dai file JSON.
-- Aggiornata l'interfaccia utente:
-  - Home, pagine categoria e carrello ora leggono i dati dalle nuove API JSON.
-  - Migliorata la tipizzazione dei dati (id come number).
-  - Risolti errori di rendering e warning TypeScript.
-- Aggiunto meta tag globale `noindex, nofollow` per impedire l'indicizzazione del sito.
-- Aggiornato il file `.env.example` e rimosso ogni riferimento a variabili non più usate.
-- Sistemato e validato la struttura dei componenti React (Client/Server Component).
+- Started from a T3 stack template (Next.js, Prisma, tRPC, Tailwind CSS, etc.).
+- Included database (PostgreSQL), Prisma ORM, and related environment/config files.
+- Had more dependencies and boilerplate for full-stack development.
+
+## Major Refactoring & Simplification
+
+- **Database and Prisma removed:**
+  - All database logic, Prisma files, and environment variables (e.g. `DATABASE_URL`) were deleted.
+  - No backend database is used; all data is now local and static.
+- **Data now in JSON files:**
+  - Product and category data moved to `/data/*.json` (alimentari, casa, frutta, verdura).
+  - Each file contains category info, products, variants, and emoji icons.
+- **API routes simplified:**
+  - Next.js API endpoints read directly from JSON files.
+  - No ORM, no migrations, no seed scripts.
+- **Dependencies reduced:**
+  - Only essential packages for Next.js, React, Tailwind CSS, and tRPC remain.
+  - No database, no authentication, no backend logic.
+
+## UI & App Structure
+
+- **Shopping list, not e-commerce:**
+  - The "cart" is a persistent shopping list, not a checkout system.
+  - No prices are shown or stored; the app is for planning, not purchasing.
+- **Components:**
+  - ProductCard: shows product, emoji, variants, and quantity selector.
+  - CartContext: manages cart state and syncs to localStorage.
+  - Category and Product pages: display products by category or individually.
+- **Emojis and icon mapping:**
+  - Every product and category uses an emoji for instant recognition.
+  - `/src/lib/icon-mapper.ts` maps emojis to Lucide icons for UI consistency.
+
+## Other Improvements
+
+- **Cleaner codebase:**
+  - Removed unused files, scripts, and environment configs.
+  - Improved TypeScript types and React component structure.
+- **Noindex meta tag:**
+  - Added to prevent search engine indexing.
+- **No authentication or payments:**
+  - The app is stateless, simple, and easy to reason about for both humans and AI agents.
+
+## Summary of Changes
+
+- Migrated from T3 full-stack template to a static, frontend-only app.
+- All data is now in flat JSON files, easy to parse and modify.
+- Cart is a shopping list, not a checkout cart; no prices or payment logic.
+- UI is mobile-first, clean, and uses emojis/icons for clarity.
+- Codebase is minimal, dependency-light, and AI-friendly.
 
 ---
 
-# Project Modification Log
-
-This file automatically tracks all modifications made by the Gemini CLI.
-
----
-
-## Stato di Avanzamento del Prompt `startingprompt.md` (9 Settembre 2025)
-
-### Cambio di Strategia
-
-Su richiesta, lo sviluppo si concentrerà prima sulla costruzione dell'interfaccia utente (UI) con dati fittizi (mock data). I passaggi relativi al database e all'API backend verranno posticipati.
-
-### In Corso:
-
-#### Passo 1: Sviluppo dell'Interfaccia Utente (Next.js & React)
-
-- **Gestione Stato Lista Spesa:**
-  - Crea `src/contexts/CartContext.tsx` per gestire la lista della spesa e salvarla in `localStorage`.
-- **Componenti (`src/app/_components/`):**
-  - `ProductCard.tsx`: Mostra prodotto, varianti, selettore quantità e bottone "Aggiungi alla Lista della Spesa".
-  - `Navbar.tsx`: Include link a `/cart` con badge articoli.
-  - `BottomNav.tsx`: Menu di navigazione inferiore per mobile.
-- **Pagine (App Router):**
-  - Home (`/page.tsx`): Mostra le categorie.
-  - Pagina Categoria (`/category/[id]/page.tsx`): Mostra i prodotti di una categoria.
-  - Pagina Lista Spesa (`/cart/page.tsx`): Mostra il riepilogo della lista e il form di invio ordine.
-- **Requisiti UI/UX e Funzionali:**
-  - Assicurare un design pulito, minimalista, mobile-first e responsive.
-  - Utilizzare icone grandi e chiare.
-  - Usare la terminologia "Lista della Spesa".
-  - Implementare una barra di ricerca nella `Navbar`.
-
-### Posticipato:
-
-#### Passo 2: Definizione dello Schema del Database
-
-- Modifica il file `prisma/schema.prisma`.
-
-#### Passo 3: Popolamento del Database (Seed)
-
-- Crea uno script di seed in `prisma/seed.ts`.
-
-#### Passo 4: Sviluppo dell'API Backend (tRPC)
-
-- Crea i router tRPC in `src/server/api/routers/`.
+**This log is intended to help AI agents and developers quickly understand the project's history, structure, and design decisions.**
