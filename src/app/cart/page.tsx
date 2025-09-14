@@ -40,8 +40,8 @@ export default function CartPage() {
                     <span className="text-xl">{item.icon || '🛒'}</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold">{item.name}</h3>
-                    <p className="font-semibold text-gray-500">{item.variantName}</p>
+                    <h3 className="font-semibold ">{item.variantName}</h3>
+                    <p className="text-gray-400">{item.name}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">

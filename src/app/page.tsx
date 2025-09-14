@@ -64,8 +64,8 @@ export default function HomePage() {
                 href={`/category/${category.id}`}
                 className="group flex flex-col items-center justify-center gap-4 rounded-xl border bg-white p-6 text-center shadow-sm transition-all hover:scale-105 hover:shadow-lg"
               >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
-                  <span className="text-2xl">{category.icon}</span>
+                  <div className="flex h-48 w-48 items-center justify-center rounded-full bg-white-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                    <span className="text-8xl">{category.icon}</span>
                 </div>
                 <span className="text-lg font-semibold">{category.name}</span>
               </Link>
