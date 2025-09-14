@@ -9,11 +9,21 @@ export default function CartPage() {
   // Debug: vediamo cosa c'è negli item del carrello
   console.log('Cart items:', cartItems);
 
-  const totalPrice = cartItems.reduce((total, item) => {
-    // Prezzo fittizio per la demo
-    const itemPrice = item.unit === 'WEIGHT' ? 2.50 : 1.80; 
-    return total + itemPrice * item.quantity;
-  }, 0);
+  // OLD PRICE CALCULATION - Commented for future use
+  // const totalPrice = cartItems.reduce((total, item) => {
+  //   // Prezzo fittizio per la demo
+  //   const itemPrice = item.unit === 'WEIGHT' ? 1.00 : 1.00; 
+  //   return total + itemPrice * item.quantity;
+  // }, 0);
+
+  // NEW CALCULATION - Separate subtotals by unit type
+  const subtotalWeight = cartItems
+    .filter(item => item.unit === 'WEIGHT')
+    .reduce((total, item) => total + item.quantity, 0);
+
+  const subtotalPieces = cartItems
+    .filter(item => item.unit === 'PIECES')
+    .reduce((total, item) => total + item.quantity, 0);
 
   return (
     <div className="container mx-auto px-4 py-8 md:px-6">
@@ -48,7 +58,10 @@ export default function CartPage() {
                   {/* Selettore Quantità */}
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                      onClick={() => updateQuantity(
+                        item.variantId, 
+                        item.quantity - (item.unit === 'WEIGHT' ? 0.25 : 1)
+                      )}
                       className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
                     >
                       <Minus className="h-4 w-4" />
@@ -57,7 +70,10 @@ export default function CartPage() {
                       {item.quantity} {item.unit === 'WEIGHT' ? 'Kg' : 'Pz'}
                     </span>
                     <button
-                      onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                      onClick={() => updateQuantity(
+                        item.variantId, 
+                        item.quantity + (item.unit === 'WEIGHT' ? 0.25 : 1)
+                      )}
                       className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300"
                     >
                       <Plus className="h-4 w-4" />
@@ -78,17 +94,25 @@ export default function CartPage() {
           <div className="rounded-lg border bg-white p-6 shadow-sm lg:col-span-1 h-fit">
             <h2 className="mb-4 text-xl font-semibold">Riepilogo</h2>
             <div className="space-y-2">
-              <div className="flex justify-between">
-                <span>Subtotale</span>
-                <span>€{totalPrice.toFixed(2)}</span>
-              </div>
+              {subtotalPieces > 0 && (
+                <div className="flex justify-between">
+                  <span>Subtotale Pezzi</span>
+                  <span>{subtotalPieces.toFixed(2)} Pz.</span>
+                </div>
+              )}
+              {subtotalWeight > 0 && (
+                <div className="flex justify-between">
+                  <span>Subtotale Kilogrammi</span>
+                  <span>{subtotalWeight.toFixed(2)} Kg.</span>
+                </div>
+              )}
               <div className="flex justify-between">
                 <span>Spedizione</span>
                 <span className="text-green-600">Gratis</span>
               </div>
               <div className="flex justify-between border-t pt-2 font-bold">
                 <span>Totale</span>
-                <span>€{totalPrice.toFixed(2)}</span>
+                <span>{(subtotalPieces + subtotalWeight).toFixed(2)} articoli</span>
               </div>
             </div>
             <button className="mt-6 w-full rounded-md bg-blue-600 py-2 font-semibold text-white hover:bg-blue-700">
