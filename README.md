@@ -1,4 +1,3 @@
-
 # GoFresco App
 
 ## Overview
@@ -52,6 +51,20 @@ GoFresco is a Next.js app designed as a modern, mobile-friendly grocery shopping
 ## Deployment
 
 No database required. Deploy to Vercel, Netlify, or any static host. All data is local and read-only.
+
+## Palette Colori
+
+La palette colori principale di GoFresco App:
+
+| Nome         | Tailwind CSS | Hex        | Utilizzo principale                |
+|--------------|--------------|------------|------------------------------------|
+| Verde Erba   | green-600    | #16A34A    | Logo "Go", badge, accenti positivi |
+| Arancione    | orange-400   | #FB923C    | Logo "Fresco", bordi, highlights   |
+| Blu Primario | blue-600     | #2563EB    | Bottoni, focus, elementi attivi    |
+| Rosso        | red-500      | #EF4444    | Badge quantità, errori, rimozione  |
+| Grigio       | gray-100-800 | #F3F4F6... | Sfondo, testo, separatori          |
+
+Tutti i colori sono gestiti tramite classi Tailwind per coerenza e accessibilità.
 
 ---
 

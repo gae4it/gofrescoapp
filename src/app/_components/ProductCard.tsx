@@ -50,7 +50,8 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition-transform hover:scale-[1.02]">
+  /* #### PRODUCT CARD #### */
+  <div className="flex flex-col overflow-hidden rounded-lg border border-orange-400 bg-white shadow-sm transition-transform hover:scale-[1.02]">
       <div className="flex items-center gap-4 p-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-600">
           <span className="emoji text-2xl">{product.icon}</span>
@@ -73,11 +74,12 @@ export function ProductCard({ product }: ProductCardProps) {
           >
             Variante
           </label>
+          {/* #### VARIANT SELECTOR #### */}
           <select
             id={`variant-${product.id}`}
             value={selectedVariantId}
             onChange={(e) => setSelectedVariantId(Number(e.target.value))}
-            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 px-1"
+            className="block w-full rounded-md border-2 border-orange-400 focus:border-orange-400 focus:ring-orange-400 sm:text-sm py-2 px-1"
           >
             {product.variants.map((variant) => (
               <option key={variant.id} value={variant.id}>
@@ -87,7 +89,7 @@ export function ProductCard({ product }: ProductCardProps) {
           </select>
         </div>
 
-        {/* Selettore Quantità */}
+        {/* #### QTY SELECTOR #### */}
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium text-gray-700">Quantità</label>
           <div className="flex items-center gap-2">

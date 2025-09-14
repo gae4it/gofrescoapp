@@ -61,7 +61,12 @@ export default function ProductPage() {
   }, [productId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      /* #### LOADER ####*/
+      <div className="flex h-64 items-center justify-center">
+        <span className="loader border-4 border-orange-400 border-t-transparent rounded-full w-12 h-12 animate-spin"></span>
+      </div>
+    );
   }
 
   if (!product) {

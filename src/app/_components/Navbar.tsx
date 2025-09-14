@@ -12,7 +12,8 @@ export function Navbar() {
     <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="text-2xl font-bold text-gray-800">
-          GoFresco
+         <span className="text-green-600">Go</span>
+         <span className="text-orange-400">Fresco</span>App
         </Link>
         <div className="flex items-center gap-4">
           {/* La barra di ricerca verrà implementata in seguito */}
@@ -24,9 +25,10 @@ export function Navbar() {
               className="w-full rounded-lg bg-gray-100 pl-8 pr-4 py-2 text-sm"
             />
           </div> */}
+          {/* #### CART ICON #### */}
           <Link
             href="/cart"
-            className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100"
+            className="relative flex h-9 w-9 items-center justify-center rounded-full border border-orange-400 hover:bg-gray-100"
             aria-label="Lista della Spesa"
           >
             <ShoppingBasket className="h-5 w-5" />

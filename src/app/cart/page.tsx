@@ -40,14 +40,14 @@ export default function CartPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-          {/* Lista Articoli */}
+          {/* ARTICLE LIST */}
           <div className="space-y-4 lg:col-span-2">
-            {/* CARD */}
+            {/* #### CARD #### */}
             {cartItems.map(item => (
-              <div key={item.variantId} className="flex flex-col items-start justify-between gap-2.5 rounded-lg border bg-white p-4 shadow-sm xs:flex-row xs:items-center xs:justify-between xs:gap-0">
+              <div key={item.variantId} className="flex flex-col items-start justify-between gap-2.5 rounded-lg border border-orange-400 bg-white p-4 shadow-sm xs:flex-row xs:items-center xs:justify-between xs:gap-0">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
-                    <span className="text-xl">{item.icon || '🛒'}</span>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
+                    <span className="text-2xl">{item.icon || '🛒'}</span>
                   </div>
                   <div>
                     <h3 className="font-semibold ">{item.variantName}</h3>
@@ -91,7 +91,7 @@ export default function CartPage() {
           </div>
 
           {/* Riepilogo Ordine */}
-          <div className="rounded-lg border bg-white p-6 shadow-sm lg:col-span-1 h-fit">
+          <div className="rounded-lg border border-orange-400 bg-white p-6 shadow-sm lg:col-span-1 h-fit">
             <h2 className="mb-4 text-xl font-semibold">Riepilogo</h2>
             <div className="space-y-2">
               {subtotalPieces > 0 && (

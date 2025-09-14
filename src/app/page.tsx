@@ -54,7 +54,9 @@ export default function HomePage() {
       </header>
 
       {loading ? (
-        <div className="text-center">Caricamento...</div>
+        <div className="flex h-64 items-center justify-center">
+          <span className="loader border-4 border-orange-400 border-t-transparent rounded-full w-12 h-12 animate-spin"></span>
+        </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
           {categories.length > 0 ? (
@@ -62,7 +64,7 @@ export default function HomePage() {
               <Link
                 key={category.id}
                 href={`/category/${category.id}`}
-                className="group flex flex-col items-center justify-center gap-4 rounded-xl border bg-white p-6 text-center shadow-sm transition-all hover:scale-105 hover:shadow-lg"
+                className="group flex flex-col items-center justify-center gap-4 rounded-xl border border-orange-400 bg-white p-6 text-center shadow-sm transition-all hover:scale-105 hover:shadow-lg"
               >
                   <div className="flex h-48 w-48 items-center justify-center rounded-full bg-white-100 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                     <span className="text-8xl">{category.icon}</span>
