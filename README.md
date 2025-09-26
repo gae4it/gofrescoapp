@@ -7,9 +7,10 @@ GoFrescoApp is a Next.js app designed as a modern, mobile-friendly grocery shopp
 ## Architecture & Data
 
 - **Frontend:** Next.js (React), Tailwind CSS for UI, tRPC for API routes.
-- **Data:** All products and categories are stored in flat JSON files in `/data`. No database is used; this makes the app portable and easy to deploy or modify.
-- **API:** Category and product data are served via simple API routes that read from JSON files.
+- **Data:** All products and categories are embedded in TypeScript files in `/src/lib/embedded-data.ts`. No database or file system access needed; optimized for serverless deployment.
+- **API:** Category and product data are served via API routes using embedded data structure.
 - **State:** The shopping list ("cart") is managed in React context and persisted in `localStorage`.
+- **Email System:** Integrated Resend service for professional order confirmation emails with HTML templates.
 
 ## Folder Structure (Key Parts)
 
@@ -41,6 +42,14 @@ GoFrescoApp is a Next.js app designed as a modern, mobile-friendly grocery shopp
 - The cart is stored in React context and synced to localStorage for persistence.
 - **No prices:** This is intentional. GoFrescoApp is for planning and organizing shopping, not for purchasing. This makes the app suitable for collaborative family lists, market planning, or personal use where prices are irrelevant or variable.
 
+## Email & Checkout System
+
+- **Professional Email Service:** Integrated with Resend for reliable email delivery.
+- **Checkout Form:** Complete customer data collection (nome, cognome, indirizzo, telefono, email).
+- **HTML Email Templates:** Branded templates with GoFrescoApp colors and professional layout.
+- **Dual Email System:** Sends confirmation to both customer and store owner.
+- **Order Summary:** Detailed product list with quantities and variants in email format.
+
 ## Why This Structure Is AI-Friendly
 
 - **Flat JSON data:** Easy for AI agents to parse, modify, or extend.
@@ -50,7 +59,12 @@ GoFrescoApp is a Next.js app designed as a modern, mobile-friendly grocery shopp
 
 ## Deployment
 
-No database required. Deploy to Vercel, Netlify, or any static host. All data is local and read-only.
+No database required. Optimized for serverless deployment on Netlify with:
+- Embedded TypeScript data (no file system access needed)
+- Netlify Functions for API routes
+- @netlify/plugin-nextjs for Next.js compatibility
+- Environment variables for Resend email service
+- Can also deploy to Vercel or other static hosts
 
 ## Palette Colori
 
