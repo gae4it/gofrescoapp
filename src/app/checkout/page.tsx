@@ -303,6 +303,7 @@ export default function CheckoutPage() {
                     Il seguente ordine verrà effettuato sotto forma di &quot;Lista della Spesa&quot;. 
                     Non sono presenti prezzi e non è garantita la presenza di tutti i prodotti selezionati. 
                     Per ulteriori informazioni contattateci direttamente in negozio. 
+                    <br />
                     Grazie e buona spesa!
                   </p>
                 </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { Plus, Minus, ShoppingCart } from "lucide-react";
 
@@ -12,17 +12,35 @@ interface ProductCardProps {
     unit: string;
     variants: { id: number; name: string }[];
   };
+  preselectedVariantId?: number;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, preselectedVariantId }: ProductCardProps) {
   const { addToCart } = useCart();
 
   const [selectedVariantId, setSelectedVariantId] = useState(
-    product.variants[0]?.id ?? 0,
+    preselectedVariantId ?? product.variants[0]?.id ?? 0,
   );
   const [quantity, setQuantity] = useState(1);
+  const [isPreselected, setIsPreselected] = useState(!!preselectedVariantId);
+
+  // Effetto per rimuovere l'evidenziazione dopo 3 secondi
+  useEffect(() => {
+    if (isPreselected) {
+      const timer = setTimeout(() => {
+        setIsPreselected(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isPreselected]);
 
   const selectedVariant = product.variants.find(v => v.id === selectedVariantId);
+
+  const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedVariantId(Number(e.target.value));
+    // Rimuovi l'evidenziazione quando l'utente cambia manualmente
+    setIsPreselected(false);
+  };
 
   const handleAddToCart = () => {
     if (selectedVariant) {
@@ -78,8 +96,12 @@ export function ProductCard({ product }: ProductCardProps) {
           <select
             id={`variant-${product.id}`}
             value={selectedVariantId}
-            onChange={(e) => setSelectedVariantId(Number(e.target.value))}
-            className="block w-full rounded-md border-2 border-orange-400 focus:border-orange-400 focus:ring-orange-400 sm:text-sm py-2 px-1"
+            onChange={handleVariantChange}
+            className={`block w-full rounded-md border-2 focus:ring-orange-400 sm:text-sm py-2 px-1 transition-all duration-300 ${
+              isPreselected 
+                ? 'border-green-500 bg-green-50 shadow-md ring-2 ring-green-500/20' 
+                : 'border-orange-400 focus:border-orange-400'
+            }`}
           >
             {product.variants.map((variant) => (
               <option key={variant.id} value={variant.id}>

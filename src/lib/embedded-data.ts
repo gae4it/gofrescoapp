@@ -120,3 +120,83 @@ export function getAllCategories() {
 export function getCategoryById(id: number): CategoryData | null {
   return categoriesData.find((cat) => cat.id === id) ?? null;
 }
+
+export function searchProducts(query: string) {
+  if (!query || query.length < 2) return [];
+  
+  const searchTerm = query.toLowerCase().trim();
+  const results: Array<{
+    product: CategoryData['products'][0] & { categoryId: number; unit: string };
+    categoryId: number;
+    categoryName: string;
+    matchType: 'product' | 'variant';
+    matchedVariant?: { id: number; name: string };
+  }> = [];
+
+  categoriesData.forEach(category => {
+    category.products.forEach(product => {
+      const productName = product.name.toLowerCase();
+      let matchFound = false;
+      let matchType: 'product' | 'variant' = 'product';
+      let matchedVariant: { id: number; name: string } | undefined;
+      
+      // Ricerca sul nome del prodotto
+      if (productName.includes(searchTerm)) {
+        matchFound = true;
+        matchType = 'product';
+      }
+      
+      // Ricerca nelle varianti del prodotto
+      if (!matchFound) {
+        for (const variant of product.variants) {
+          const variantName = variant.name.toLowerCase();
+          if (variantName.includes(searchTerm)) {
+            matchFound = true;
+            matchType = 'variant';
+            matchedVariant = { id: variant.id, name: variant.name };
+            break;
+          }
+        }
+      }
+      
+      if (matchFound) {
+        results.push({
+          product: {
+            ...product,
+            categoryId: category.id,
+            unit: category.unit
+          },
+          categoryId: category.id,
+          categoryName: category.name,
+          matchType,
+          matchedVariant
+        });
+      }
+    });
+  });
+
+  // Ordina per rilevanza
+  results.sort((a, b) => {
+    const aName = a.product.name.toLowerCase();
+    const bName = b.product.name.toLowerCase();
+    
+    // Prima i match sui prodotti, poi sui varianti
+    if (a.matchType === 'product' && b.matchType === 'variant') return -1;
+    if (a.matchType === 'variant' && b.matchType === 'product') return 1;
+    
+    // Per i match dello stesso tipo, ordina per rilevanza
+    const aExact = aName === searchTerm;
+    const bExact = bName === searchTerm;
+    const aStarts = aName.startsWith(searchTerm);
+    const bStarts = bName.startsWith(searchTerm);
+    
+    if (aExact && !bExact) return -1;
+    if (!aExact && bExact) return 1;
+    if (aStarts && !bStarts) return -1;
+    if (!aStarts && bStarts) return 1;
+    
+    return aName.localeCompare(bName);
+  });
+
+  return results;
+}

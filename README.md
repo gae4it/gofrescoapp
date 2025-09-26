@@ -16,11 +16,14 @@ GoFrescoApp is a Next.js app designed as a modern, mobile-friendly grocery shopp
 
 - `/data/` — JSON files for all categories and products. Each file (e.g. `casa.json`, `frutta.json`) contains a category with products, variants, and an emoji icon.
 - `/src/app/` — Main Next.js app pages and components.
-	- `_components/ProductCard.tsx`: UI for each product, with emoji, variant selector, and quantity controls.
+	- `_components/ProductCard.tsx`: UI for each product, with emoji, variant selector, quantity controls, and preselection support.
 	- `cart/page.tsx`: The shopping list page, showing all items added by the user.
 	- `category/[id]/page.tsx`: Lists products for a given category.
 	- `product/[id]/page.tsx`: Shows details for a single product.
+	- `checkout/page.tsx`: Complete customer data form for order processing.
+- `/src/components/SearchBar.tsx` — Advanced search component with debouncing, keyboard shortcuts, and focus management.
 - `/src/contexts/CartContext.tsx` — Handles cart state, add/remove/update logic, and localStorage sync.
+- `/src/lib/embedded-data.ts` — Embedded TypeScript data with search functions for serverless compatibility.
 - `/src/lib/icon-mapper.ts` — Maps product emojis to Lucide icons for consistent UI.
 
 ## Product & Category Data
@@ -49,6 +52,18 @@ GoFrescoApp is a Next.js app designed as a modern, mobile-friendly grocery shopp
 - **HTML Email Templates:** Branded templates with GoFrescoApp colors and professional layout.
 - **Dual Email System:** Sends confirmation to both customer and store owner.
 - **Order Summary:** Detailed product list with quantities and variants in email format.
+
+## Advanced Search System
+
+- **Smart Search Bar:** Live search with debouncing (300ms) and elegant rounded design.
+- **Multi-Level Search:** Searches both product names and their variants (dropdown options).
+- **Intelligent Results:** Priority-based results (exact matches first, then partial matches).
+- **Variant Preselection:** When searching for variants, automatically preselects the matching option in dropdown.
+- **Visual Feedback:** Green highlighting on preselected variants with smooth animations.
+- **Keyboard & Touch Support:** ESC key and click/tap outside to exit search mode.
+- **Dynamic UI:** Categories hide during search, results show with clean card layout.
+- **Contextual Messages:** Shows result count and handles no-results scenarios.
+- **Mobile Optimized:** Touch-friendly interface with responsive design.
 
 ## Why This Structure Is AI-Friendly
 
