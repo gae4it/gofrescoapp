@@ -16,7 +16,11 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "GoFrescoApp - La tua spesa online",
   description: "Fai la spesa online in modo semplice e veloce con GoFrescoApp.",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon", url: "/favicon.svg", type: "image/svg+xml" },
+    { rel: "icon", url: "/favicon.ico", sizes: "32x32" },
+    { rel: "apple-touch-icon", url: "/favicon.svg", sizes: "180x180" }
+  ],
 };
 
 export default function RootLayout({
@@ -29,7 +33,7 @@ export default function RootLayout({
       <head>
         <meta name="robots" content="noindex, nofollow" />
       </head>
-      <body>
+      <body /* suppressHydrationWarning={true} */>
         <TRPCReactProvider>
           <CartProvider>
             <div className="flex min-h-screen flex-col">

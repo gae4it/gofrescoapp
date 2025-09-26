@@ -1,0 +1,8 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Limone semplificato per piccole dimensioni -->
+  <ellipse cx="8" cy="9" rx="5" ry="6" fill="#FFD700" stroke="#FFA500" stroke-width="0.5"/>
+  <!-- Foglia piccola -->
+  <ellipse cx="8" cy="4" rx="1.5" ry="2.5" fill="#32CD32" transform="rotate(-10 8 4)"/>
+  <!-- Highlight -->
+  <ellipse cx="6.5" cy="7" rx="1" ry="1.5" fill="#FFFF99" opacity="0.8"/>
+</svg>

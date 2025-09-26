@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingBasket, Home, ArrowLeft } from "lucide-react";
+import { ShoppingBasket, Home, ArrowLeft, User } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -52,6 +52,25 @@ export function Navbar() {
             <Home className="h-5 w-5" />
           </Link>
           
+          {/* #### BACK BUTTON #### */}
+          <button
+            onClick={() => router.back()}
+            className="relative flex h-9 w-9 items-center justify-center rounded-full border hover:bg-gray-100 cursor-pointer"
+            style={{ borderColor: '#1E2939' }}
+            aria-label="Indietro"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+
+          {/* #### USER ICON #### */}
+          <Link
+            href="/profile"
+            className="relative flex h-9 w-9 items-center justify-center rounded-full border border-yellow-500 hover:bg-gray-100"
+            aria-label="Profilo Utente"
+          >
+            <User className="h-5 w-5" />
+          </Link>
+          
           {/* #### CART ICON #### */}
           <Link
             href="/cart"
@@ -66,15 +85,6 @@ export function Navbar() {
             )}
           </Link>
 
-          {/* #### BACK BUTTON #### */}
-          <button
-            onClick={() => router.back()}
-            className="relative flex h-9 w-9 items-center justify-center rounded-full border hover:bg-gray-100"
-            style={{ borderColor: '#1E2939' }}
-            aria-label="Indietro"
-          >
-            <ArrowLeft className="h-5 w-5" />
-          </button>
 
         </div>
       </div>
