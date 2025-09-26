@@ -4,11 +4,26 @@ import Link from "next/link";
 import { ShoppingBasket, Home, ArrowLeft } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export function Navbar() {
   const { getItemCount } = useCart();
-  const itemCount = getItemCount();
   const router = useRouter();
+  const [itemCount, setItemCount] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+
+  // Gestisce l'idratazione client-side
+  useEffect(() => {
+    setIsClient(true);
+    setItemCount(getItemCount());
+  }, [getItemCount]);
+
+  // Aggiorna il conteggio quando il carrello cambia
+  useEffect(() => {
+    if (isClient) {
+      setItemCount(getItemCount());
+    }
+  }, [getItemCount, isClient]);
 
   return (
     <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur-md">
@@ -44,7 +59,7 @@ export function Navbar() {
             aria-label="Lista della Spesa"
           >
             <ShoppingBasket className="h-5 w-5" />
-            {itemCount > 0 && (
+            {isClient && itemCount > 0 && (
               <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                 {itemCount}
               </span>
@@ -60,7 +75,7 @@ export function Navbar() {
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
-          
+
         </div>
       </div>
     </header>

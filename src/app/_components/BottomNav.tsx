@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, LayoutGrid, ShoppingBasket, User, ArrowLeft } from "lucide-react";
+import { Home, ShoppingBasket, User, ArrowLeft } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
@@ -15,7 +16,21 @@ export function BottomNav() {
   const pathname = usePathname();
   const router = useRouter();
   const { getItemCount } = useCart();
-  const itemCount = getItemCount();
+  const [itemCount, setItemCount] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+
+  // Gestisce l'idratazione client-side
+  useEffect(() => {
+    setIsClient(true);
+    setItemCount(getItemCount());
+  }, [getItemCount]);
+
+  // Aggiorna il conteggio quando il carrello cambia
+  useEffect(() => {
+    if (isClient) {
+      setItemCount(getItemCount());
+    }
+  }, [getItemCount, isClient]);
 
   return (
     <nav className="fixed bottom-0 z-10 w-full border-t bg-white md:hidden">
@@ -34,7 +49,7 @@ export function BottomNav() {
             >
               <div className="relative">
                 <Icon className="h-6 w-6" />
-                {isCart && itemCount > 0 && (
+                {isClient && isCart && itemCount > 0 && (
                   <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                     {itemCount}
                   </span>
