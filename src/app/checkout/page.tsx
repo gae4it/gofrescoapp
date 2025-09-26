@@ -34,6 +34,15 @@ export default function CheckoutPage() {
     email: "",
   });
 
+  // Calcolo subtotali (stesso codice della pagina cart)
+  const subtotalWeight = cartItems
+    .filter(item => item.unit === 'WEIGHT')
+    .reduce((total, item) => total + item.quantity, 0);
+
+  const subtotalPieces = cartItems
+    .filter(item => item.unit === 'PIECES')
+    .reduce((total, item) => total + item.quantity, 0);
+
   // Aspetta che il componente sia caricato prima di verificare il carrello
   useEffect(() => {
     setIsLoaded(true);
@@ -338,7 +347,10 @@ export default function CheckoutPage() {
                 <div key={item.variantId} className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
                     <span>{item.icon}</span>
-                    <span className="truncate">{item.variantName}</span>
+                    <div className="flex items-center gap-1">
+                      <span className="text-gray-500">{item.name}</span>
+                      <span className="font-medium"> {item.variantName}</span>
+                    </div>
                   </div>
                   <span className="font-medium">
                     {item.quantity} {item.unit === 'WEIGHT' ? 'Kg' : 'Pz'}
@@ -354,13 +366,25 @@ export default function CheckoutPage() {
             </div>
 
             <div className="border-t pt-4 space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Totale Articoli</span>
-                <span className="font-medium">{cartItems.length}</span>
-              </div>
+              {subtotalPieces > 0 && (
+                <div className="flex justify-between text-sm">
+                  <span>Subtotale Pezzi</span>
+                  <span className="font-medium">{subtotalPieces.toFixed(2)} Pz.</span>
+                </div>
+              )}
+              {subtotalWeight > 0 && (
+                <div className="flex justify-between text-sm">
+                  <span>Subtotale Kilogrammi</span>
+                  <span className="font-medium">{subtotalWeight.toFixed(2)} Kg.</span>
+                </div>
+              )}
               <div className="flex justify-between text-sm">
                 <span>Spedizione</span>
                 <span className="text-green-600 font-medium">Gratis</span>
+              </div>
+              <div className="flex justify-between border-t pt-2 font-bold">
+                <span>Totale</span>
+                <span>{(subtotalPieces + subtotalWeight).toFixed(2)} articoli</span>
               </div>
             </div>
           </div>

@@ -126,6 +126,7 @@ function generateEmailHTML(customerData: CustomerData, cartItems: CartItem[]): s
         }
         .item-emoji {
           font-size: 24px;
+          margin-right: 0.3rem;
         }
         .item-text {
           flex: 1;
@@ -144,6 +145,7 @@ function generateEmailHTML(customerData: CustomerData, cartItems: CartItem[]): s
           background: #EFF6FF;
           padding: 4px 8px;
           border-radius: 6px;
+          align-self: flex-end;
         }
         .summary {
           background: #F3F4F6;
@@ -197,8 +199,10 @@ function generateEmailHTML(customerData: CustomerData, cartItems: CartItem[]): s
     </head>
     <body>
       <div class="header">
-        <div class="logo">🟢🟠 GoFrescoApp</div>
-        <div style="font-size: 16px;">Lista della Spesa</div>
+        <div class="logo">
+          <span style="color: #16A34A;">Go</span><span style="color: #FB923C;">Fresco</span><span style="color: #1E293B;">App</span>
+        </div>
+        <div style="font-size: 16px;">La Tua Lista della Spesa</div>
       </div>
 
       <div class="section">
@@ -286,7 +290,7 @@ function generateEmailHTML(customerData: CustomerData, cartItems: CartItem[]): s
           </div>
           ` : ''}
           <div class="summary-row total">
-            <span>Articoli Unici:</span>
+            <span>Totale Articoli:</span>
             <span>${cartItems.length}</span>
           </div>
         </div>
@@ -301,8 +305,8 @@ function generateEmailHTML(customerData: CustomerData, cartItems: CartItem[]): s
       </div>
 
       <div class="footer">
-        <div style="font-weight: bold; color: #16A34A; margin-bottom: 10px;">
-          🟢🟠 GoFrescoApp
+        <div style="font-weight: bold; margin-bottom: 10px;">
+          <span style="color: #16A34A;">Go</span><span style="color: #FB923C;">Fresco</span><span style="color: #1E293B;">App</span>
         </div>
         <div>
           Lista della spesa generata il ${new Date().toLocaleDateString('it-IT')} alle ${new Date().toLocaleTimeString('it-IT')}
