@@ -1,8 +1,4 @@
-import fs from 'fs';
-import path from 'path';
 import { type NextRequest, NextResponse } from 'next/server';
-
-const dataDir = path.resolve(process.cwd(), 'data');
 
 interface CategoryData {
   id: number;
@@ -10,6 +6,18 @@ interface CategoryData {
   icon: string;
   unit: string;
   products: unknown[];
+}
+
+async function fetchCategoryData(filename: string): Promise<CategoryData> {
+  const baseUrl = process.env.NODE_ENV === 'production' 
+    ? 'https://gofrescoapp.netlify.app'
+    : 'http://localhost:3000';
+  
+  const response = await fetch(`${baseUrl}/data/${filename}`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${filename}`);
+  }
+  return response.json() as Promise<CategoryData>;
 }
 
 export async function GET(request: NextRequest) {
@@ -21,17 +29,12 @@ export async function GET(request: NextRequest) {
   }
   
   try {
-    const files = fs.readdirSync(dataDir);
-    const file = files.find((f) => f.endsWith('.json') && f.startsWith(getFilePrefix(Number(id))));
-    
-    if (!file) {
+    const filename = getFilename(Number(id));
+    if (!filename) {
       return NextResponse.json({ error: 'Categoria non trovata.' }, { status: 404 });
     }
     
-    const filePath = path.join(dataDir, file);
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const json = JSON.parse(content) as CategoryData;
-    
+    const json = await fetchCategoryData(filename);
     return NextResponse.json(json);
   } catch (error) {
     console.error('Error loading category:', error);
@@ -39,12 +42,12 @@ export async function GET(request: NextRequest) {
   }
 }
 
-function getFilePrefix(id: number): string {
+function getFilename(id: number): string | null {
   switch (id) {
-    case 1: return 'frutta';
-    case 2: return 'verdura';
-    case 3: return 'alimentari';
-    case 4: return 'casa';
-    default: return '';
+    case 1: return 'frutta.json';
+    case 2: return 'verdura.json';
+    case 3: return 'alimentari.json';
+    case 4: return 'casa.json';
+    default: return null;
   }
 }

@@ -38,6 +38,18 @@ export default function RootLayout({
                 {children}
               </main>
               <BottomNav />
+              
+              {/* Footer Copyright */}
+              <footer className="bg-gray-50 py-4 text-center">
+                <a 
+                  href="http://gofrescoapp.netlify.app/" 
+                  className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GoFrescoApp © 2025
+                </a>
+              </footer>
             </div>
           </CartProvider>
         </TRPCReactProvider>

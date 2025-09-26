@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "name": "Frutta",
+  "icon": "🍎",
+  "unit": "WEIGHT",
+  "products": [
+    { "id": 101, "name": "Mele", "icon": "🍎", "variants": [ { "id": 1001, "name": "Kanzi" }, { "id": 1002, "name": "Granny Smith" }, { "id": 1003, "name": "Royal Gala" }, { "id": 1004, "name": "Fuji" }, { "id": 1005, "name": "Golden Delicious" } ] },
+    { "id": 102, "name": "Pere", "icon": "🍐", "variants": [ { "id": 1011, "name": "Abate" }, { "id": 1012, "name": "Carmen" }, { "id": 1013, "name": "Guyot" }, { "id": 1014, "name": "Santa Maria" }, { "id": 1015, "name": "William" }, { "id": 1016, "name": "Kaiser" }, { "id": 1017, "name": "Decana" } ] },
+    { "id": 103, "name": "Uva", "icon": "🍇", "variants": [ { "id": 1021, "name": "da tavola" }, { "id": 1022, "name": "Vittoria" }, { "id": 1023, "name": "Italia" }, { "id": 1024, "name": "Red Globe" }, { "id": 1025, "name": "Uva spina" }, { "id": 1026, "name": "Uva fragola" } ] },
+    { "id": 104, "name": "Pesche", "icon": "🍑", "variants": [ { "id": 1031, "name": "nettarine" }, { "id": 1032, "name": "tabacchiera" }, { "id": 1033, "name": "percoche" }, { "id": 1034, "name": "pesche gialle" }, { "id": 1035, "name": "pesche bianche" } ] },
+    { "id": 105, "name": "Kiwi", "icon": "🥝", "variants": [ { "id": 1041, "name": "verde" }, { "id": 1042, "name": "gold" } ] },
+    { "id": 106, "name": "Banane", "icon": "🍌", "variants": [ { "id": 1051, "name": "Cavendish" }, { "id": 1052, "name": "plantain" }, { "id": 1053, "name": "banane rosse" } ] },
+    { "id": 107, "name": "Angurie", "icon": "🍉", "variants": [ { "id": 1061, "name": "crimson sweet" }, { "id": 1062, "name": "sugar baby" }, { "id": 1063, "name": "moon and stars" } ] },
+    { "id": 108, "name": "Frutti rossi", "icon": "🫐", "variants": [ { "id": 1071, "name": "mirtilli" }, { "id": 1072, "name": "fragole" }, { "id": 1073, "name": "lamponi" }, { "id": 1074, "name": "ribes" }, { "id": 1075, "name": "more" }, { "id": 1076, "name": "ribes rosso" }, { "id": 1077, "name": "ribes nero" } ] },
+    { "id": 109, "name": "Albicocche", "icon": "🍑", "variants": [ { "id": 1081, "name": "Bella d'Italia" }, { "id": 1082, "name": "Precoce di Treviglio" }, { "id": 1083, "name": "Valleggia" } ] },
+    { "id": 110, "name": "Susine", "icon": "🫐", "variants": [ { "id": 1091, "name": "Santa Rosa" }, { "id": 1092, "name": "Angelino" }, { "id": 1093, "name": "President" } ] },
+    { "id": 111, "name": "Ciliegie", "icon": "🍒", "variants": [ { "id": 1101, "name": "Durone" }, { "id": 1102, "name": "Ferrovia" }, { "id": 1103, "name": "Bigarreau" } ] },
+    { "id": 112, "name": "Meloni", "icon": "🍈", "variants": [ { "id": 1111, "name": "cantalupo" }, { "id": 1112, "name": "retato" }, { "id": 1113, "name": "invernale" } ] },
+    { "id": 113, "name": "Arance", "icon": "🍊", "variants": [ { "id": 1121, "name": "da tavola" }, { "id": 1122, "name": "da spremere" }, { "id": 1123, "name": "Navel" }, { "id": 1124, "name": "Tarocco" }, { "id": 1125, "name": "Valencia" } ] },
+    { "id": 114, "name": "Limoni", "icon": "🍋", "variants": [ { "id": 1131, "name": "Femminello" }, { "id": 1132, "name": "Meyer" }, { "id": 1133, "name": "Eureka" } ] }
+  ]
+}
