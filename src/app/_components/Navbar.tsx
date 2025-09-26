@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingBasket } from "lucide-react";
+import { ShoppingBasket, Home, ArrowLeft } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useRouter } from "next/navigation";
 
 export function Navbar() {
   const { getItemCount } = useCart();
   const itemCount = getItemCount();
+  const router = useRouter();
 
   return (
     <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur-md">
@@ -25,6 +27,16 @@ export function Navbar() {
               className="w-full rounded-lg bg-gray-100 pl-8 pr-4 py-2 text-sm"
             />
           </div> */}
+          
+          {/* #### HOME ICON #### */}
+          <Link
+            href="/"
+            className="relative flex h-9 w-9 items-center justify-center rounded-full border border-green-600 hover:bg-gray-100"
+            aria-label="Home"
+          >
+            <Home className="h-5 w-5" />
+          </Link>
+          
           {/* #### CART ICON #### */}
           <Link
             href="/cart"
@@ -38,6 +50,17 @@ export function Navbar() {
               </span>
             )}
           </Link>
+
+          {/* #### BACK BUTTON #### */}
+          <button
+            onClick={() => router.back()}
+            className="relative flex h-9 w-9 items-center justify-center rounded-full border hover:bg-gray-100"
+            style={{ borderColor: '#1E2939' }}
+            aria-label="Indietro"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          
         </div>
       </div>
     </header>
