@@ -1,7 +1,7 @@
 
 # Project Change Log
 
-This file summarizes the evolution of GoFresco from its original T3 Next.js template to the current, cleaner, database-free, AI-friendly structure.
+This file summarizes the evolution of GoFrescoApp from its original T3 Next.js template to the current, cleaner, database-free, AI-friendly structure.
 
 ---
 

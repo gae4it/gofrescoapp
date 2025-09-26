@@ -14,8 +14,8 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "GoFresco - La tua spesa online",
-  description: "Fai la spesa online in modo semplice e veloce con GoFresco.",
+  title: "GoFrescoApp - La tua spesa online",
+  description: "Fai la spesa online in modo semplice e veloce con GoFrescoApp.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

@@ -115,8 +115,11 @@ export default function CartPage() {
                 <span>{(subtotalPieces + subtotalWeight).toFixed(2)} articoli</span>
               </div>
             </div>
-            <button className="mt-6 w-full rounded-md bg-blue-600 py-2 font-semibold text-white hover:bg-blue-700">
-              Invia Ordine (non funzionante)
+            <button 
+              onClick={() => window.location.href = '/checkout'}
+              className="mt-6 w-full rounded-md bg-blue-600 py-2 font-semibold text-white hover:bg-blue-700"
+            >
+              Procedi con l&apos;Ordine
             </button>
           </div>
         </div>

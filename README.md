@@ -1,8 +1,8 @@
-# GoFresco App
+# GoFrescoApp
 
 ## Overview
 
-GoFresco is a Next.js app designed as a modern, mobile-friendly grocery shopping list. It is **not** a traditional e-commerce: users create and manage a shopping list, but do not purchase items or see prices. The app is optimized for speed, simplicity, and clarity, making it ideal for collaborative or personal grocery planning.
+GoFrescoApp is a Next.js app designed as a modern, mobile-friendly grocery shopping list. It is **not** a traditional e-commerce: users create and manage a shopping list, but do not purchase items or see prices. The app is optimized for speed, simplicity, and clarity, making it ideal for collaborative or personal grocery planning.
 
 ## Architecture & Data
 
@@ -39,7 +39,7 @@ GoFresco is a Next.js app designed as a modern, mobile-friendly grocery shopping
 - The "cart" is a **shopping list**, not a checkout cart. No prices are shown or stored.
 - Users select products, variants, and quantities (by weight or pieces), then add them to their list.
 - The cart is stored in React context and synced to localStorage for persistence.
-- **No prices:** This is intentional. GoFresco is for planning and organizing shopping, not for purchasing. This makes the app suitable for collaborative family lists, market planning, or personal use where prices are irrelevant or variable.
+- **No prices:** This is intentional. GoFrescoApp is for planning and organizing shopping, not for purchasing. This makes the app suitable for collaborative family lists, market planning, or personal use where prices are irrelevant or variable.
 
 ## Why This Structure Is AI-Friendly
 
@@ -54,7 +54,7 @@ No database required. Deploy to Vercel, Netlify, or any static host. All data is
 
 ## Palette Colori
 
-La palette colori principale di GoFresco App:
+La palette colori principale di GoFrescoApp:
 
 | Nome         | Tailwind CSS | Hex        | Utilizzo principale                |
 |--------------|--------------|------------|------------------------------------|
