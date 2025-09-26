@@ -126,7 +126,7 @@ function generateEmailHTML(customerData: CustomerData, cartItems: CartItem[]): s
         }
         .item-emoji {
           font-size: 24px;
-          margin-right: 0.3rem;
+          margin-right: 0.8rem;
         }
         .item-text {
           flex: 1;
@@ -146,6 +146,9 @@ function generateEmailHTML(customerData: CustomerData, cartItems: CartItem[]): s
           padding: 4px 8px;
           border-radius: 6px;
           align-self: flex-end;
+          text-align: right;
+          margin-left: auto;
+          min-width: 60px;
         }
         .summary {
           background: #F3F4F6;
@@ -279,13 +282,13 @@ function generateEmailHTML(customerData: CustomerData, cartItems: CartItem[]): s
         <div class="summary">
           ${subtotalPieces > 0 ? `
           <div class="summary-row">
-            <span>Totale Pezzi:</span>
+            <span>Totale Pezzi: </span>
             <strong>${subtotalPieces.toFixed(0)} Pz</strong>
           </div>
           ` : ''}
           ${subtotalWeight > 0 ? `
           <div class="summary-row">
-            <span>Totale Peso:</span>
+            <span>Totale Peso: </span>
             <strong>${subtotalWeight.toFixed(2)} Kg</strong>
           </div>
           ` : ''}
