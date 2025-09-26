@@ -1,15 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import fruttaData from '../../../../public/data/frutta.json';
-import verduraData from '../../../../public/data/verdura.json';
-import alimentariData from '../../../../public/data/alimentari.json';
-import casaData from '../../../../public/data/casa.json';
-
-const dataMap = {
-  1: fruttaData,
-  2: verduraData,
-  3: alimentariData,
-  4: casaData,
-};
+import { getCategoryById } from '@/lib/embedded-data';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -20,8 +10,7 @@ export async function GET(request: NextRequest) {
   }
   
   try {
-    const categoryId = Number(id);
-    const categoryData = dataMap[categoryId as keyof typeof dataMap];
+    const categoryData = getCategoryById(Number(id));
     
     if (!categoryData) {
       return NextResponse.json({ error: 'Categoria non trovata.' }, { status: 404 });

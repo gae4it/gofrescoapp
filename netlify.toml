@@ -5,19 +5,21 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[functions]
-  directory = ".netlify/functions"
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  SKIP_ENV_VALIDATION = "1"
+  NPM_FLAGS = "--production=false"
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+# Force Next.js to use Node.js runtime for API routes
+[[edge_functions]]
+  function = "nextjs"
+  path = "/api/*"
 
+# Redirect all other routes to Next.js
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[build.environment]
-  NEXT_TELEMETRY_DISABLED = "1"
-  SKIP_ENV_VALIDATION = "1"
+[functions]
+  node_bundler = "esbuild"
