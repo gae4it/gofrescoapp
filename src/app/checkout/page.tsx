@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
+import { useOrderHistory } from "@/contexts/OrderHistoryContext";
 import { useRouter } from "next/navigation";
 import { Mail, User, Home, Phone, MapPin, Info } from "lucide-react";
 
@@ -18,7 +19,8 @@ interface CustomerData {
 }
 
 export default function CheckoutPage() {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
+  const { addOrder } = useOrderHistory();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -102,9 +104,27 @@ export default function CheckoutPage() {
       const result = await response.json() as { error?: string; success?: boolean; message?: string };
 
       if (response.ok) {
+        // Save order to history
+        const orderTotal = subtotalPieces + subtotalWeight;
+        addOrder({
+          items: cartItems,
+          customerInfo: {
+            name: `${customerData.nome} ${customerData.cognome}`,
+            email: customerData.email,
+            phone: customerData.telefono,
+            notes: customerData.altreInformazioni || undefined,
+          },
+          total: orderTotal,
+          status: 'sent'
+        });
+
+        // Clear the cart after successful order
+        clearCart();
+
         alert(`✅ Lista inviata con successo!\n\nRiceverai una conferma via email a: ${customerData.email}\n\nGrazie per aver scelto GoFrescoApp!`);
-        // Redirect to home or thank you page
-        router.push('/');
+        
+        // Redirect to profile to show the saved order
+        router.push('/profile');
       } else {
         alert(`❌ Errore: ${result.error ?? 'Errore sconosciuto'}\n\nRiprova o contattaci direttamente.`);
       }

@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
 // Definiamo i tipi per gli oggetti nel carrello
-interface CartItem {
+export interface CartItem {
   productId: number;
   variantId: number;
   name: string;

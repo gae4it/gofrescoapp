@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { CartProvider } from "@/contexts/CartContext";
+import { OrderHistoryProvider } from "@/contexts/OrderHistoryContext";
 import { Navbar } from "@/app/_components/Navbar";
 import { BottomNav } from "@/app/_components/BottomNav";
 
@@ -36,25 +37,27 @@ export default function RootLayout({
       <body /* suppressHydrationWarning={true} */>
         <TRPCReactProvider>
           <CartProvider>
-            <div className="flex min-h-screen flex-col">
-              <Navbar />
-              <main className="flex-grow bg-gray-50">
-                {children}
-                
-                {/* Footer Copyright */}
-                <footer className="bg-gray-50 py-4 text-center mb-20 md:mb-0">
-                  <a 
-                    href="http://gofrescoapp.netlify.app/" 
-                    className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GoFrescoApp © 2025
-                  </a>
-                </footer>
-              </main>
-              <BottomNav />
-            </div>
+            <OrderHistoryProvider>
+              <div className="flex min-h-screen flex-col">
+                <Navbar />
+                <main className="flex-grow bg-gray-50">
+                  {children}
+                  
+                  {/* Footer Copyright */}
+                  <footer className="bg-gray-50 py-4 text-center mb-20 md:mb-0">
+                    <a 
+                      href="http://gofrescoapp.netlify.app/" 
+                      className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GoFrescoApp © 2025
+                    </a>
+                  </footer>
+                </main>
+                <BottomNav />
+              </div>
+            </OrderHistoryProvider>
           </CartProvider>
         </TRPCReactProvider>
       </body>
