@@ -21,10 +21,15 @@ GoFrescoApp is a Next.js app designed as a modern, mobile-friendly grocery shopp
 	- `category/[id]/page.tsx`: Lists products for a given category.
 	- `product/[id]/page.tsx`: Shows details for a single product.
 	- `checkout/page.tsx`: Complete customer data form for order processing.
+	- `profile/page.tsx`: User area with order history, statistics, and management tools.
+	- `privacy/page.tsx`, `terms/page.tsx`, `cookies/page.tsx`, `disclaimer/page.tsx`: Legal compliance pages.
 - `/src/components/SearchBar.tsx` — Advanced search component with debouncing, keyboard shortcuts, and focus management.
 - `/src/contexts/CartContext.tsx` — Handles cart state, add/remove/update logic, and localStorage sync.
+- `/src/contexts/OrderHistoryContext.tsx` — Manages order history persistence and retrieval with localStorage.
 - `/src/lib/embedded-data.ts` — Embedded TypeScript data with search functions for serverless compatibility.
 - `/src/lib/icon-mapper.ts` — Maps product emojis to Lucide icons for consistent UI.
+- `/public/robots.txt` — Comprehensive bot blocking configuration.
+- `/public/_headers` — Netlify security headers for privacy protection.
 
 ## Product & Category Data
 
@@ -65,6 +70,26 @@ GoFrescoApp is a Next.js app designed as a modern, mobile-friendly grocery shopp
 - **Contextual Messages:** Shows result count and handles no-results scenarios.
 - **Mobile Optimized:** Touch-friendly interface with responsive design.
 
+## Order History & User Management
+
+- **localStorage Persistence:** Complete order history without authentication requirements.
+- **User Profile Dashboard:** Statistics showing total orders, items, and completion status.
+- **Order Management:** Full order details with expandable product lists and customer information.
+- **Reorder Functionality:** One-click reordering of previous shopping lists.
+- **History Controls:** Clear all history with confirmation modal for data management.
+- **Responsive Design:** Mobile-optimized order cards with touch-friendly expansion.
+- **Privacy-First:** All data stored locally in browser, no server-side storage.
+
+## Legal Compliance & Security
+
+- **GDPR Compliance:** Complete privacy policy framework for EU regulations.
+- **Legal Pages:** Terms of service, cookie policy, and service disclaimer.
+- **Privacy Protection:** Multi-layer bot blocking (Google, Bing, AI crawlers).
+- **Security Headers:** HTTP headers preventing caching and archiving.
+- **Search Engine Blocking:** Comprehensive noindex/nofollow meta tags.
+- **Data Minimization:** localStorage-only approach for maximum user control.
+- **Transparent Policies:** Clear explanations of data usage and user rights.
+
 ## Why This Structure Is AI-Friendly
 
 - **Flat JSON data:** Easy for AI agents to parse, modify, or extend.
@@ -99,8 +124,12 @@ Tutti i colori sono gestiti tramite classi Tailwind per coerenza e accessibilit�
 
 **Summary for AI agents:**
 - Shopping list app, not e-commerce
-- Data in `/data/*.json` (products, categories, emojis)
-- Cart is a list, no prices
-- Emoji-to-icon mapping for UI clarity
-- All logic in React context and components
-- No authentication, payments, or backend database
+- Order history with localStorage persistence (no authentication)
+- Legal compliance pages (privacy, terms, cookies, disclaimer)
+- Multi-layer security and bot prevention
+- Data in embedded TypeScript (no file system access)
+- Cart and order management with React Context
+- Advanced search with variant preselection
+- Email integration with professional templates
+- No authentication, payments, or server-side database
+- Privacy-first design with user data control

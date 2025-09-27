@@ -1,0 +1,11 @@
+# Security Policy per GoFrescoApp
+# Questo sito è privato e non destinato all'indicizzazione pubblica
+
+Contact: security@gofrescoapp.com
+Preferred-Languages: it, en
+Policy: https://gofrescoapp.netlify.app/disclaimer
+Canonical: https://gofrescoapp.netlify.app/.well-known/security.txt
+
+# Avviso: Questo è un servizio privato
+# Non è autorizzata l'indicizzazione o l'archiviazione automatica
+# Per informazioni sui dati personali: privacy@gofrescoapp.com

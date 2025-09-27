@@ -121,7 +121,9 @@ export default function CheckoutPage() {
         // Clear the cart after successful order
         clearCart();
 
-        alert(`✅ Lista inviata con successo!\n\nRiceverai una conferma via email a: ${customerData.email}\n\nGrazie per aver scelto GoFrescoApp!`);
+        alert(`✅ Lista inviata con successo!\n\n
+          Visita la pagina Profilo per consultare le spese effettuate.\n\n
+          Grazie per aver scelto GoFrescoApp!`);
         
         // Redirect to profile to show the saved order
         router.push('/profile');

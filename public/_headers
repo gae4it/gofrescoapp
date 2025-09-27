@@ -1,0 +1,31 @@
+# Headers globali per bloccare tutti i robot e crawler
+
+/*
+  # Blocco completo robot e motori di ricerca
+  X-Robots-Tag: noindex, nofollow, nosnippet, noarchive, noimageindex, notranslate
+  
+  # Prevenzione caching per evitare archiviazione
+  Cache-Control: no-cache, no-store, must-revalidate, max-age=0
+  Pragma: no-cache
+  Expires: 0
+  
+  # Sicurezza generale
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: no-referrer
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  
+  # Blocco specifico per robot AI (headers personalizzati)
+  X-AI-Bot-Block: all
+  X-Crawl-Block: true
+
+# Protezione extra per robots.txt
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+# Protezione per security.txt
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400

@@ -2,7 +2,7 @@
 
 import { useOrderHistory } from "@/contexts/OrderHistoryContext";
 import { useCart } from "@/contexts/CartContext";
-import { ShoppingBag, Mail, Phone, Calendar, RotateCcw, Trash2, Package, CheckCircle } from "lucide-react";
+import { ShoppingBag, Mail, Phone, Calendar, RotateCcw, Trash2, Package, CheckCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -10,6 +10,7 @@ export default function ProfilePage() {
   const { orders, clearHistory, reorderItems } = useOrderHistory();
   const { addToCart } = useCart();
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [expandedOrders, setExpandedOrders] = useState<Set<string>>(new Set());
 
   const handleReorder = (orderId: string) => {
     const items = reorderItems(orderId);
@@ -33,14 +34,31 @@ export default function ProfilePage() {
     alert("✅ Cronologia eliminata con successo!");
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("it-IT", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
+  const toggleOrderExpansion = (orderId: string) => {
+    setExpandedOrders(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(orderId)) {
+        newSet.delete(orderId);
+      } else {
+        newSet.add(orderId);
+      }
+      return newSet;
     });
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return {
+      date: date.toLocaleDateString("it-IT", {
+        year: "numeric",
+        month: "long", 
+        day: "numeric"
+      }),
+      time: date.toLocaleTimeString("it-IT", {
+        hour: "2-digit",
+        minute: "2-digit"
+      })
+    };
   };
 
   return (
@@ -126,24 +144,43 @@ export default function ProfilePage() {
             ) : (
               <div className="space-y-6">
                 {orders.map((order) => (
-                  <div key={order.id} className="border rounded-lg p-6 hover:bg-gray-50 transition-colors">
+                  <div key={order.id} className="group border rounded-lg p-6 hover:bg-gray-50 transition-colors">
                     {/* Order Header */}
                     <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-3">
+                      {/* Desktop Layout - con icona */}
+                      <div className="hidden sm:flex items-center gap-3">
                         <div className="flex-shrink-0">
                           <CheckCircle className="h-6 w-6 text-green-600" />
                         </div>
                         <div>
                           <h3 className="font-semibold text-lg">Lista della Spesa</h3>
-                          <div className="flex items-center gap-4 text-sm text-gray-500">
+                          <div className="flex flex-row items-center gap-4 text-sm text-gray-500">
                             <div className="flex items-center gap-1">
                               <Calendar className="h-4 w-4" />
-                              {formatDate(order.date)}
+                              {formatDate(order.date).date} ore {formatDate(order.date).time}
                             </div>
                             <div className="flex items-center gap-1">
                               <Package className="h-4 w-4" />
                               {order.items.length} articoli
                             </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Mobile Layout - senza icona, layout verticale */}
+                      <div className="block sm:hidden w-full">
+                        <h3 className="font-semibold text-lg mb-3">Lista della Spesa</h3>
+                        <div className="space-y-2 text-sm text-gray-500">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-4 w-4" />
+                            {formatDate(order.date).date}
+                          </div>
+                          <div className="ml-5">
+                            ore {formatDate(order.date).time}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Package className="h-4 w-4" />
+                            {order.items.length} articoli
                           </div>
                         </div>
                       </div>
@@ -153,31 +190,73 @@ export default function ProfilePage() {
                         className="flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
                       >
                         <RotateCcw className="h-4 w-4" />
-                        Riordina
+                        <span className="hidden sm:inline">Riordina</span>
+                        <span className="sm:hidden">↻</span>
                       </button>
                     </div>
 
                     {/* Customer Info */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 p-4 bg-gray-50 rounded-lg">
-                      <div className="flex items-center gap-2 text-sm">
-                        <Mail className="h-4 w-4 text-gray-400" />
-                        <span className="font-medium">{order.customerInfo.name}</span>
-                        <span className="text-gray-500">({order.customerInfo.email})</span>
-                      </div>
-                      {order.customerInfo.phone && (
+                    <div className="mb-4 p-4 bg-gray-50 group-hover:bg-white rounded-lg transition-colors">
+                      {/* Desktop Layout */}
+                      <div className="hidden sm:flex flex-col gap-2 md:grid md:grid-cols-2 md:gap-4">
                         <div className="flex items-center gap-2 text-sm">
-                          <Phone className="h-4 w-4 text-gray-400" />
-                          <span className="text-gray-600">{order.customerInfo.phone}</span>
+                          <Mail className="h-4 w-4 text-gray-400" />
+                          <span className="font-medium">{order.customerInfo.name}</span>
+                          <span className="text-gray-500">{order.customerInfo.email}</span>
                         </div>
-                      )}
+                        {order.customerInfo.phone && (
+                          <div className="flex items-center gap-2 text-sm">
+                            <Phone className="h-4 w-4 text-gray-400" />
+                            <span className="text-gray-600">{order.customerInfo.phone}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Mobile Layout */}
+                      <div className="block sm:hidden space-y-2 text-sm">
+                        <div className="flex items-center gap-2">
+                          <Mail className="h-4 w-4 text-gray-400" />
+                          <span className="font-medium">{order.customerInfo.name}</span>
+                        </div>
+                        <div className="ml-5 text-gray-500">
+                          {order.customerInfo.email}
+                        </div>
+                        {order.customerInfo.phone && (
+                          <div className="flex items-center gap-2">
+                            <Phone className="h-4 w-4 text-gray-400" />
+                            <span className="text-gray-600">{order.customerInfo.phone}</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                     {/* Order Items */}
                     <div className="space-y-2">
-                      <h4 className="font-medium text-gray-900 mb-3">Articoli ordinati:</h4>
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="font-medium text-gray-900">Articoli ordinati:</h4>
+                        {order.items.length > 6 && (
+                          <button
+                            onClick={() => toggleOrderExpansion(order.id)}
+                            className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 transition-colors"
+                          >
+                            {expandedOrders.has(order.id) ? (
+                              <>
+                                <ChevronUp className="h-4 w-4" />
+                                Mostra meno
+                              </>
+                            ) : (
+                              <>
+                                <ChevronDown className="h-4 w-4" />
+                                Mostra tutti ({order.items.length})
+                              </>
+                            )}
+                          </button>
+                        )}
+                      </div>
+                      
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {order.items.slice(0, 6).map((item) => (
-                          <div key={item.variantId} className="flex items-center justify-between text-sm py-2 px-3 bg-gray-50 rounded">
+                        {(expandedOrders.has(order.id) ? order.items : order.items.slice(0, 6)).map((item) => (
+                          <div key={item.variantId} className="flex items-center justify-between text-sm py-2 px-3 bg-gray-50 group-hover:bg-white rounded transition-colors">
                             <div className="flex items-center gap-2">
                               <span>{item.icon}</span>
                               <div>
@@ -190,9 +269,15 @@ export default function ProfilePage() {
                             </span>
                           </div>
                         ))}
-                        {order.items.length > 6 && (
-                          <div className="col-span-full text-center text-sm text-gray-500 py-2">
-                            ... e altri {order.items.length - 6} articoli
+                        
+                        {order.items.length > 6 && !expandedOrders.has(order.id) && (
+                          <div className="col-span-full text-center py-3">
+                            <button
+                              onClick={() => toggleOrderExpansion(order.id)}
+                              className="text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-1 rounded-lg transition-colors"
+                            >
+                              ... e altri {order.items.length - 6} articoli - Clicca per vedere tutti
+                            </button>
                           </div>
                         )}
                       </div>
