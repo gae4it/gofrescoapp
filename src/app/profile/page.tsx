@@ -190,26 +190,31 @@ export default function ProfilePage() {
                         className="flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
                       >
                         <RotateCcw className="h-4 w-4" />
-                        <span className="hidden sm:inline">Riordina</span>
-                        <span className="sm:hidden">↻</span>
+                        <span>Riordina</span>
                       </button>
                     </div>
 
                     {/* Customer Info */}
                     <div className="mb-4 p-4 bg-gray-50 group-hover:bg-white rounded-lg transition-colors">
                       {/* Desktop Layout */}
-                      <div className="hidden sm:flex flex-col gap-2 md:grid md:grid-cols-2 md:gap-4">
-                        <div className="flex items-center gap-2 text-sm">
-                          <Mail className="h-4 w-4 text-gray-400" />
-                          <span className="font-medium">{order.customerInfo.name}</span>
-                          <span className="text-gray-500">{order.customerInfo.email}</span>
-                        </div>
-                        {order.customerInfo.phone && (
-                          <div className="flex items-center gap-2 text-sm">
-                            <Phone className="h-4 w-4 text-gray-400" />
-                            <span className="text-gray-600">{order.customerInfo.phone}</span>
+                      <div className="hidden sm:block">
+                        <div className="flex flex-col gap-2 md:grid md:grid-cols-2 md:gap-4">
+                          <div className="text-sm">
+                            <div className="flex items-center gap-2 mb-1">
+                              <Mail className="h-4 w-4 text-gray-400" />
+                              <span className="font-medium">{order.customerInfo.name}</span>
+                            </div>
+                            <div className="ml-6 text-gray-500 break-words">
+                              {order.customerInfo.email}
+                            </div>
                           </div>
-                        )}
+                          {order.customerInfo.phone && (
+                            <div className="flex items-center gap-2 text-sm">
+                              <Phone className="h-4 w-4 text-gray-400" />
+                              <span className="text-gray-600">{order.customerInfo.phone}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
 
                       {/* Mobile Layout */}
@@ -218,7 +223,7 @@ export default function ProfilePage() {
                           <Mail className="h-4 w-4 text-gray-400" />
                           <span className="font-medium">{order.customerInfo.name}</span>
                         </div>
-                        <div className="ml-5 text-gray-500">
+                        <div className="ml-5 text-gray-500 break-words">
                           {order.customerInfo.email}
                         </div>
                         {order.customerInfo.phone && (
