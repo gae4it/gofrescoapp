@@ -133,3 +133,5 @@ Tutti i colori sono gestiti tramite classi Tailwind per coerenza e accessibilit√
 - Email integration with professional templates
 - No authentication, payments, or server-side database
 - Privacy-first design with user data control
+
+Last Change: 27-09-2025 - 18:25:26
